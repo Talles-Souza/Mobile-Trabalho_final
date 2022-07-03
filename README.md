@@ -4,7 +4,7 @@ Após realizar o clone do repositório....
 
 2 - Após isso, defina seu workspace;
 
-3 - Abra seu terminal git e crie sua branch, logo em seguida mude para ela, usando o comando "git cheackout -b NOME DA BRANCH ";
+3 - Abra seu terminal git e crie sua branch, logo em seguida mude para ela, usando o comando "git checkout -b NOME DA BRANCH ";
 
 4 - Após isso faça todo o trajeto para seu commit, usando os comando, "git add . , git commit -m "nome do commit", git push origin NOME DA BRANCH(É SÓ ESCREVER O NOME DA SUA BRANCH QUE ELE CRIA AUTOMATICAMENTE NO REPOSITORIO ONLINE) " ;
 
