@@ -8,7 +8,8 @@ import { Produto } from "../pages/product";
 import Login from "../pages/login";
 import Home from "../pages/home";
 import Categorias from "../pages/categories";
-
+import Register from "../pages/registration";
+import ForgotPassword from "../pages/recoverPassword";
 
 
 
@@ -67,6 +68,16 @@ const Routes = () => {
                     options={{ headerShown: false }}
                     name='Categorias'
                     component={Categorias}
+                />
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Register'
+                    component={Register}
+                />
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Recuperar senha'
+                    component={ForgotPassword}
                 />
 
                 <StackNavigation.Screen
