@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { View, StyleSheet, Alert, ActivityIndicator, Image } from "react-native";
 import { Text, Input, Icon, Button } from "react-native-elements";
 import Axios from "../../api/axios";
+import { TextInput } from 'react-native';
 
 const Register = ({ route, navigation }) => {
 
@@ -13,13 +14,14 @@ const Register = ({ route, navigation }) => {
     const [errors, setErrors] = useState([]);
 
 
-    const handleRegister = async (e: any) => {
-        e.preventDefault();
-        const data = {
-            emailCliente: email,
-            nomeCompletoCliente: name,
-            senha: senha,
+    const handleRegister = async (name: string, email: string, senha: String) => {
+        console.log(name, email, senha);
 
+        const data = {
+
+            nomeUsuario: name,
+            email: email,
+            senha: senha,
         };
         try {
             await Axios.post("/autenticacao/registro", data);
@@ -28,7 +30,7 @@ const Register = ({ route, navigation }) => {
             setName("");
             setEmail("");
             setSenha("");
-            navigation.navigate('/Login')
+            () => navigation.navigate('/Login')
             Alert.alert("Cadastro realizado com sucesso, voce ira ser redirecionado para a tela de login")
         } catch (err) {
             Alert.alert(`err`)
@@ -52,23 +54,26 @@ const Register = ({ route, navigation }) => {
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../../assets/register.png')} />
             <Text style={styles.texto_entrada}>{'Cadastro'}</Text>
+
             <Input inputContainerStyle={styles.inputContainer}
-                placeholder='Nome de usÃºario'
-                onChangeText={newText => setName(newText)}
+                placeholder='Nome de usuario'
+                onChangeText={setName}
+                value={name}
                 leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
                 placeholderTextColor={'black'}
             />
+
             <Input inputContainerStyle={styles.inputContainer}
                 placeholder='E-mail'
-
-                value={email} onChangeText={email => setEmail(email)}
+                onChangeText={setEmail}
+                value={email}
                 leftIcon={<Icon name='email' color='#000' type='Entypo' size={24} />}
                 placeholderTextColor={'black'}
             />
             <Input inputContainerStyle={styles.inputContainer}
                 placeholder='Senha'
-
-                value={senha} onChangeText={senha => setSenha(senha)}
+                onChangeText={setSenha}
+                value={senha}
                 leftIcon={<Icon name="vpn-key" color="#000000" type="MaterialIcons" size={24} />}
                 placeholderTextColor={'black'}
                 secureTextEntry
@@ -76,8 +81,8 @@ const Register = ({ route, navigation }) => {
             />
             <Button
                 title='Registrar'
-                onPress={(e) => handleRegister(e)}
-                // onPress={() => navigation.navigate('Login')}
+                onPress={() => handleRegister(name, email, senha)}
+
                 titleStyle={styles.buttons_text}
                 buttonStyle={styles.buttons}
             />
@@ -85,7 +90,7 @@ const Register = ({ route, navigation }) => {
             <Button
                 title="Voltar"
 
-
+                onPress={() => navigation.navigate('Login')}
                 titleStyle={styles.buttons_text2}
                 buttonStyle={styles.back_button}
 
