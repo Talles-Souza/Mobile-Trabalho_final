@@ -1,46 +1,49 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { TouchableOpacity, Image, View } from "react-native";
+import { Icon } from "react-native-elements";
 import { Produto } from "../pages/product";
 
+import DrawerContent from "../components/customDrawer";
 import Login from "../pages/login";
 import Home from "../pages/home";
-import Categorias from "../pages/categories";
+import Categories from "../pages/categories";
+import Register from "../pages/registration";
+import ForgotPassword from "../pages/recoverPassword";
+import Profile from "../pages/profile";
 
-
-
-
-
-const TabNavigation = createBottomTabNavigator();
-const BottomTabNavigation = () => {
-    return (
-        <TabNavigation.Navigator screenOptions={{
-            headerShown: false,
-            tabBarStyle: { backgroundColor: '#1395d6d6', borderBottomWidth: 0, }
-        }}>
-            <TabNavigation.Screen name='HomeTabScreen' component={Home} />
-            <TabNavigation.Screen name='CategoriasTabScreen' component={Categorias} />
-        </TabNavigation.Navigator>
-    );
-}
 const DrawerNavigation = createDrawerNavigator();
-const NavigationDrawer = () => {
+const NavigationDrawer = ({ route, navigation }: any) => {
 
     return (
-        <DrawerNavigation.Navigator>
+        <DrawerNavigation.Navigator drawerContent={props => <DrawerContent {...props} />}
+            screenOptions={() => ({
+                headerStyle: {
+                    backgroundColor: '#562637',
+                    height: 70,
+                },
+            })}
+        >
             <DrawerNavigation.Screen
-                name='TabNavigationScreen'
-                component={BottomTabNavigation}
-                options={{ title: 'Home' }}
-            />
+                name='Bookland' component={Home}
+                options={{
+                    headerTintColor: '#fff',
+                    drawerActiveTintColor: '#fff',
+                    headerTitle: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('')}>
+                            <Icon style={{ marginRight: 10, }} name="shopping-cart" size={35} color="black" />
 
+                        </TouchableOpacity>
+                    ),
+                }}
+            />
             <DrawerNavigation.Screen
                 name="CategoriasDrawerScreen"
-                component={Categorias}
+                component={Categories}
                 options={{ title: 'Categorias' }}
-
             />
 
         </DrawerNavigation.Navigator>
@@ -50,6 +53,7 @@ const NavigationDrawer = () => {
 const StackNavigation = createNativeStackNavigator();
 
 const Routes = () => {
+
     return (
         <NavigationContainer>
             <StackNavigation.Navigator>
@@ -66,15 +70,28 @@ const Routes = () => {
                 <StackNavigation.Screen
                     options={{ headerShown: false }}
                     name='Categorias'
-                    component={Categorias}
+                    component={Categories}
                 />
-
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Register'
+                    component={Register}
+                />
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Recuperar senha'
+                    component={ForgotPassword}
+                />
                 <StackNavigation.Screen
                     options={{ headerShown: false }}
                     name='ProdutoScreen'
                     component={Produto}
                 />
-
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Profile'
+                    component={Profile}
+                />
             </StackNavigation.Navigator>
         </NavigationContainer>
 

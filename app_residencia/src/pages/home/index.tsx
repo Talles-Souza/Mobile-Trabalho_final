@@ -23,7 +23,7 @@ const Home = ({ route, navigation }) => {
 
 
 
-    //get categoria, CONSUMO DE API PRONTO, FAVOR NAO MEXER
+    //Get categoria, CONSUMO DE API PRONTO, FAVOR NAO MEXER
     const { usuario } = useContext(AutenticacaoContext);
     // const { token } = route.params;
     const [categorias, setCategoria] = useState<any[]>([]);
