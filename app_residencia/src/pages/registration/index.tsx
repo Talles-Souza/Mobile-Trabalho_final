@@ -30,8 +30,8 @@ const Register = ({ route, navigation }) => {
             setName("");
             setEmail("");
             setSenha("");
-            () => navigation.navigate('/Login')
-            Alert.alert("Cadastro realizado com sucesso, voce ira ser redirecionado para a tela de login")
+            navigation.navigate('Login')
+            Alert.alert("Parabéns , cadastro realizado com sucesso !!")
         } catch (err) {
             Alert.alert(`err`)
             setShow(true);
