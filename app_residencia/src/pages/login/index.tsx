@@ -66,7 +66,7 @@ const Login = ({ navigation }: any) => {
                     buttonStyle={styles.button_cadastro}
                 />
                 <Button
-                    title='Recuperar senha'
+                    title='Alterar senha'
                     onPress={() => navigation.navigate('Recuperar senha')}
                     buttonStyle={styles.button_recuperar}
                     titleStyle={styles.buttons_text3}
