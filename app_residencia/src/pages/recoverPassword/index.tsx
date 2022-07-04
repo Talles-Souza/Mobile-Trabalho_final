@@ -1,13 +1,51 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Alert, TextInput, Image } from "react-native";
 import { Button, Icon, Input, Text } from "react-native-elements";
-
+import { ScrollView } from 'react-native-gesture-handler';
+import Axios from '../../api/axios';
 const ForgotPassword = ({ navigation }) => {
+    const [id, setId] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [senha2, setSenha2] = useState('');
+    const [show, setShow] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [errors, setErrors] = useState([]);
 
     const handleVoltar = async () => {
         navigation.navigate('Login');
     }
+
+    const handleRegister = async (id: string, name: string, email: string, senha: String) => {
+        console.log(name, email, senha);
+        const count = parseInt(id, 10)
+        const data = {
+            idUsuario: count,
+            nomeUsuario: name,
+            email: email,
+            senha: senha,
+        };
+
+        try {
+            await Axios.post("/autenticacao/recuperar-senha", data);
+            setShow(true);
+            setSuccess(true);
+            setName("");
+            setEmail("");
+            setSenha("");
+            setSenha2("");
+            navigation.navigate('Login')
+            Alert.alert("Parabéns , Senha redefinida com sucesso !!")
+        } catch (err) {
+            Alert.alert(`${err}`)
+            setShow(true);
+            setSuccess(false);
+        }
+    };
+
+
+
 
 
 
@@ -22,32 +60,65 @@ const ForgotPassword = ({ navigation }) => {
         }
     }
     return (
-        <View style={styles.container}>
-            <Image style={styles.imagem} resizeMode='stretch' source={{ uri: 'https://media.discordapp.net/attachments/989667114665267250/992642226259771422/Autenticacao-imagem-sem_fundo.png' }} />
-            <Text style={styles.texto_entrada}>Recuperar senha</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='E-mail'
-                keyboardType='email-address'
-                returnKeyType='next'
-                onChangeText={(t) => setEmail(t)}
-                autoFocus={true}
-            />
-            <Button
-                title='Recuperar'
-                onPress={Recover}
-                titleStyle={styles.buttons}
-                buttonStyle={styles.buttons}
-                containerStyle={styles.buttonsContainerStyle}
-            />
-            <Button
-                title='Voltar'
-                onPress={handleVoltar}
-                titleStyle={styles.buttons2}
-                buttonStyle={styles.buttons2}
-                containerStyle={styles.buttonsContainerStyle2}
-            />
-        </View>
+
+        <ScrollView>
+            <View style={styles.container}>
+                <Image style={styles.imagem} resizeMode='stretch' source={{ uri: 'https://media.discordapp.net/attachments/989667114665267250/992642226259771422/Autenticacao-imagem-sem_fundo.png' }} />
+
+                <View><Text style={styles.texto_entrada}>Alterar senha</Text></View>
+
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='ID do usuario'
+                    onChangeText={setId}
+                    value={id}
+                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    placeholderTextColor={'black'}
+                />
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='Nome de usuario'
+                    onChangeText={setName}
+                    value={name}
+                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    placeholderTextColor={'black'}
+                />
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='Email do usuario'
+                    onChangeText={setEmail}
+                    value={email}
+                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    placeholderTextColor={'black'}
+                />
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='Nova senha'
+                    onChangeText={setSenha}
+                    value={senha}
+                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    placeholderTextColor={'black'}
+                />
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='Confirmar senha'
+                    onChangeText={setSenha2}
+                    value={senha2}
+                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    placeholderTextColor={'black'}
+                />
+
+                <Button
+                    title='Alterar'
+                    onPress={() => handleRegister(id, name, email, senha)}
+                    titleStyle={styles.buttons}
+                    buttonStyle={styles.buttons}
+                    containerStyle={styles.buttonsContainerStyle}
+                />
+                <Button
+                    title='Voltar'
+                    onPress={handleVoltar}
+                    titleStyle={styles.buttons2}
+                    buttonStyle={styles.buttons2}
+                    containerStyle={styles.buttonsContainerStyle2}
+                />
+            </View>
+        </ScrollView>
     );
 };
 export default ForgotPassword;
@@ -65,6 +136,7 @@ const styles = StyleSheet.create({
     texto_entrada: {
         justifyContent: "center",
         alignSelf: "center",
+        marginBottom: 30,
         fontWeight: 'bold',
         fontSize: 35,
         color: '#000000',
@@ -131,6 +203,11 @@ const styles = StyleSheet.create({
         marginBottom: 50,
         width: 400,
         height: 300,
+    },
+    inputContainer: {
+        backgroundColor: '#F9F6F6',
+        padding: 5,
+        borderRadius: 10,
     }
 
 });

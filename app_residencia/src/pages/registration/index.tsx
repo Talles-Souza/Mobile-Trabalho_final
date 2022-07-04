@@ -24,7 +24,19 @@ const Register = ({ route, navigation }) => {
             senha: senha,
         };
         try {
-            await Axios.post("/autenticacao/registro", data);
+            const formData = new FormData();
+            formData.append('usuario', JSON.stringify(data));
+            formData.append('file', {
+                uri: "file://C:/mobile-projeto-final/app_residencia/src/assets/bookland.png",//Your Image File Path
+                type: 'image/jpeg',
+                name: "imagename.jpg",
+            });
+            const config = {
+                headers: {
+                    'Content-type': 'multipart/form-data'
+                }
+            }
+            await Axios.post("/autenticacao/registro", formData, config);
             setShow(true);
             setSuccess(true);
             setName("");
@@ -33,11 +45,12 @@ const Register = ({ route, navigation }) => {
             navigation.navigate('Login')
             Alert.alert("Parabéns , cadastro realizado com sucesso !!")
         } catch (err) {
-            Alert.alert(`err`)
+            Alert.alert(`${err}`)
             setShow(true);
             setSuccess(false);
         }
     };
+
 
 
 

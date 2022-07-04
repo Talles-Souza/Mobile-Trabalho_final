@@ -1,25 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
 import Axios from "../../api/axios";
 import MySearch from '../../components/search';
 import { StyleSheet } from "react-native";
 import { AutenticacaoContext } from "../../context/AutenticacaoContext";
 import { View } from "react-native-ui-lib";
-import { FlatList } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
+import CardCategories from "../../components/card/cardCategories";
 
-//Deixei alguns importes de elementos que vcs podem usar para englobar os components na hora de montar a pagina categoria
-// favor só coloquem os components que vao estruturar a pagina que depois Eu(Talles) vou fazer o consumo da api.
-const Categorias = () => {
 
-    //Get categoria ainda nao está pronto
-
+const Categories = ({ route, navigation }) => {
+    const numColumns = 2;
+    const [loading, setLoading] = useState(false);
     const { usuario } = useContext(AutenticacaoContext);
-    // const { token } = route.params;
     const [categorias, setCategoria] = useState<any[]>([]);
 
     useEffect(() => {
         getDadosCategoria();
     }, []);
+
 
     const getDadosCategoria = async () => {
         Axios.get(
@@ -38,14 +36,33 @@ const Categorias = () => {
 
 
     return (
-        <ScrollView style={styles.container}>
-            <MySearch />
+        <View style={styles.container}>
+            <View style={styles.view}>
+                <MySearch />
 
+                <FlatList
 
+                    data={categorias}
+                    keyExtractor={item => item.idCategoria}
+                    numColumns={numColumns}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={loading}
+                            onRefresh={getDadosCategoria}
+                            tintColor={'#EEE'}
 
+                        />
+                    }
+                    renderItem={({ item }) =>
+                        <CardCategories
+                            dados={item}
+                            navigation={navigation}
+                        />
+                    }
+                />
 
-            {/*EXEMPLO DE CONSUMO, FAVOR NAO MEXER*/}
-            {/* 
+                {/*EXEMPLO DE CONSUMO, FAVOR NAO MEXER*/}
+                {/* 
             <View style={styles.view} >
                 {categorias.map((categoria, indice) => (
                     <MyCard
@@ -54,25 +71,26 @@ const Categorias = () => {
                     />))}
             </View> */}
 
-
-        </ScrollView>
+            </View>
+        </View>
     );
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'rgba(201, 167, 174, 1)',
+    },
+    container2: {
 
     },
     view: {
-        flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+});
 
-
-
-    }
-})
-
-export default Categorias;
+export default Categories;
