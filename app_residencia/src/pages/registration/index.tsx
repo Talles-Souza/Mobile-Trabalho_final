@@ -215,9 +215,10 @@ const styles = StyleSheet.create({
 
     },
     inputContainer: {
-        backgroundColor: '#e0dada',
+        backgroundColor: '#ffffff',
         padding: 5,
         borderRadius: 10,
+        borderColor: '#854553'
     },
     buttons: {
         width: 360,

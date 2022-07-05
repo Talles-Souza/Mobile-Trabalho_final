@@ -79,7 +79,7 @@ const Login = ({ navigation }: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#A2717C',
+        backgroundColor: '#ffffff',
         padding: 16,
         alignItems: 'stretch',
         justifyContent: 'center'
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         marginLeft: 50,
     },
     inputContainer: {
-        backgroundColor: '#F9F6F6',
+        backgroundColor: '#ffffff',
         marginTop: 10,
         padding: 5,
         borderRadius: 10,
