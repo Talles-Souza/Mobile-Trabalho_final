@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Alert, ActivityIndicator, Image } from "react-native";
+import { View, StyleSheet, Alert, ActivityIndicator, Image, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button } from "react-native-elements";
 import Axios from "../../api/axios";
 import { TextInput } from 'react-native';
-
+import { CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 const Register = ({ route, navigation }) => {
 
     const [name, setName] = useState('');
@@ -26,11 +26,11 @@ const Register = ({ route, navigation }) => {
         try {
             const formData = new FormData();
             formData.append('usuario', JSON.stringify(data));
-            formData.append('file', {
-                uri: "file://C:/mobile-projeto-final/app_residencia/src/assets/bookland.png",//Your Image File Path
-                type: 'image/jpeg',
-                name: "imagename.jpg",
-            });
+            // formData.append('file', {
+            //     uri: "file://C:/mobile-projeto-final/app_residencia/src/assets/bookland.png",//Your Image File Path
+            //     type: 'image/jpeg',
+            //     name: "imagename.jpg",
+            // });
             const config = {
                 headers: {
                     'Content-type': 'multipart/form-data'
@@ -52,7 +52,69 @@ const Register = ({ route, navigation }) => {
     };
 
 
+    const handleImage = () => {
 
+        Alert.alert("Selecione", "informe onde deseja pegar a foto", [
+            {
+
+                text: "Galeria",
+                onPress: () => pickImageFromGalery(),
+                style: 'default'
+
+            },
+            {
+
+                text: "Câmera",
+                onPress: () => pickImageFromCamera(),
+                style: 'default'
+
+            },
+            {
+                // cancelable: true,
+                // onDismiss: () => console.log('arrumar depois ...')
+
+
+            }
+        ]
+        );
+
+
+    };
+
+    const [imageUser, setImageUser] = useState('');
+    const pickImageFromGalery = async () => {
+
+        const options: ImageLibraryOptions = {
+            mediaType: 'photo',
+        }
+        const result = await launchImageLibrary(options);
+        console.log(result);
+
+        //Método para passar a foto para o banco de dados
+        if (result?.assets) {
+            setImageUser(result.assets[0].uri!)
+        }
+
+    }
+
+
+    const pickImageFromCamera = async () => {
+
+        const options: CameraOptions = {
+            mediaType: 'photo',
+            saveToPhotos: false,
+            cameraType: 'front',
+            quality: 1,
+        }
+        const result = await launchCamera(options);
+        console.log(result);
+
+        //Método para passar a foto para o banco de dados
+        // if (result?.assets) {
+        //     setImageUser(result.assets[0].uri!)
+        // }
+
+    }
 
 
 
@@ -62,10 +124,14 @@ const Register = ({ route, navigation }) => {
 
     /* const handleRegister = async (name: string, email: string, senha: string) => {
          console.log(`Nome: ${name} - Email : ${email} - Senha : ${senha}`);*/
+    console.log("Imagem", imageUser);
 
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../../assets/register.png')} />
+            {/* <Image style={styles.logo} source={{ uri: imageUser }} />*/}
+
+
             <Text style={styles.texto_entrada}>{'Cadastro'}</Text>
 
             <Input inputContainerStyle={styles.inputContainer}
@@ -92,6 +158,17 @@ const Register = ({ route, navigation }) => {
                 secureTextEntry
 
             />
+            <TouchableOpacity
+
+            >
+
+                <Button
+                    onPress={handleImage}
+                    title='Selecionar foto'
+
+                />
+
+            </TouchableOpacity>
             <Button
                 title='Registrar'
                 onPress={() => handleRegister(name, email, senha)}

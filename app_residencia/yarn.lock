@@ -2429,6 +2429,11 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==
 
+cd@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/cd/-/cd-0.3.3.tgz#108ecb57bff93b96b9115c54573cfef3008ef94d"
+  integrity sha512-X2y0Ssu48ucdkrNgCdg6k3EZWjWVy/dsEywUUTeZEIW31f3bQfq65Svm+TzU1Hz+qqhdmyCdjGhUvRsSKHl/mw==
+
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz"
@@ -4195,6 +4200,11 @@ invariant@*, invariant@^2.2.4:
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
   dependencies:
     loose-envify "^1.0.0"
+
+ios@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ios/-/ios-0.0.1.tgz#4c6f774d8b0c2e9bb53c3411a6cdf00ac51dd92d"
+  integrity sha512-yhzNDf7dFMzay0eC+geyoDWUV335S17HiOQ3PumOhRn8SIFrjx6RhdVRs4dqCaw9emlhWPzuSk5o10ziUdOrWQ==
 
 ip@^1.1.5:
   version "1.1.8"
@@ -6533,6 +6543,11 @@ react-native-gradle-plugin@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz"
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
+
+react-native-image-picker@^4.8.4:
+  version "4.8.4"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-4.8.4.tgz#ac52f1e265458e944664adf1dcd0a9ee408fe083"
+  integrity sha512-Mjh2j/sddyolb16EpmprWzbtyeFvW8Xgzr/8WNi9d6bR2FC/kL78cY/a+7Yzujg5ZDtT1MWys+eWw/qtfwgGiw==
 
 react-native-iphone-x-helper@^1.3.1:
   version "1.3.1"
