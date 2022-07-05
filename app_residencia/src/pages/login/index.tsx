@@ -65,12 +65,12 @@ const Login = ({ navigation }: any) => {
                     titleStyle={styles.buttons_text2}
                     buttonStyle={styles.button_cadastro}
                 />
-                <Button
-                    title='Alterar senha'
+                {<Button
+                    title='Esqueceu a senha?'
                     onPress={() => navigation.navigate('Recuperar senha')}
                     buttonStyle={styles.button_recuperar}
                     titleStyle={styles.buttons_text3}
-                />
+                />}
             </View>
         </View>
     );

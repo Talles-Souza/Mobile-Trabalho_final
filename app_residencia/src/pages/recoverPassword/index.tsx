@@ -3,7 +3,10 @@ import { View, StyleSheet, Alert, TextInput, Image } from "react-native";
 import { Button, Icon, Input, Text } from "react-native-elements";
 import { ScrollView } from 'react-native-gesture-handler';
 import Axios from '../../api/axios';
-const ForgotPassword = ({ navigation }) => {
+
+
+
+const ChangePassword = ({ navigation }) => {
     const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -14,7 +17,7 @@ const ForgotPassword = ({ navigation }) => {
     const [errors, setErrors] = useState([]);
 
     const handleVoltar = async () => {
-        navigation.navigate('Login');
+        navigation.navigate('Profile');
     }
 
     const handleRegister = async (id: string, name: string, email: string, senha: String) => {
@@ -35,7 +38,7 @@ const ForgotPassword = ({ navigation }) => {
             setEmail("");
             setSenha("");
             setSenha2("");
-            navigation.navigate('Login')
+            navigation.navigate('Profile')
             Alert.alert("Parabéns , Senha redefinida com sucesso !!")
         } catch (err) {
             Alert.alert(`${err}`)
@@ -121,7 +124,7 @@ const ForgotPassword = ({ navigation }) => {
         </ScrollView>
     );
 };
-export default ForgotPassword;
+export default ChangePassword;
 
 const styles = StyleSheet.create({
     container: {
