@@ -4,7 +4,8 @@ import axios from "axios";
 //OBS, QUANDO FOR COLOCAR OUTRA BASEURL, NAO APAGAR A ANTIGA, COMENTE APENAS, COMENTE E COLOQUE A SUA 
 
 const Axios = axios.create({
-    baseURL: "http://10.0.2.2:8080/comercio-seguro",
+    //baseURL: "http://10.0.2.2:8080/comercio-seguro",
+    baseURL: "http://192.168.100.184:8080/comercio-seguro",
 });
 
 export default Axios;

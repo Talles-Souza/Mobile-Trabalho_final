@@ -81,7 +81,7 @@ const DrawerContent = (props: any) => {
                         />
                     )}
                     label="Sair"
-                    onPress={() => { }}
+                    onPress={() => { props.navigation.navigate('Login') }}
                 />
             </Drawer.Section>
         </View>
