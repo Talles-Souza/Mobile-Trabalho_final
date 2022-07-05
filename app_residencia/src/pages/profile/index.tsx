@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet, Alert, Image } from "react-native";
-import { Text } from "react-native-elements";
+import { Text, Button } from "react-native-elements";
 import { AutenticacaoContext } from '../../context/AutenticacaoContext';
 
-const Profile = () => {
+
+const Profile = ({ route, navigation }) => {
 
     const { usuario } = useContext(AutenticacaoContext);
 
@@ -28,6 +29,12 @@ const Profile = () => {
                     </View>
                 </View>
             </View>
+            <Button
+                title='Alterar senha'
+                onPress={() => navigation.navigate('Alterar senha')}
+                buttonStyle={styles.button_recuperar}
+                titleStyle={styles.buttons_text3}
+            />
         </View>
     );
 }
@@ -100,6 +107,16 @@ const styles = StyleSheet.create({
         width: 300,
         height: 60,
         marginTop: 15,
+    },
+    buttons_text3: {
+        fontSize: 18,
+    },
+    button_recuperar: {
+        marginTop: 10,
+        width: 180,
+        padding: 13,
+        borderRadius: 9,
+        backgroundColor: '#854553',
     }
 });
 

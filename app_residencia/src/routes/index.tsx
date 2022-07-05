@@ -11,8 +11,9 @@ import Login from "../pages/login";
 import Home from "../pages/home";
 import Categories from "../pages/categories";
 import Register from "../pages/registration";
-import ForgotPassword from "../pages/recoverPassword";
+import ChangePassword from "../pages/recoverPassword";
 import Profile from "../pages/profile";
+import ForgotPassword from "../pages/recoverPassword/forgotPassword";
 
 const DrawerNavigation = createDrawerNavigator();
 const NavigationDrawer = ({ route, navigation }: any) => {
@@ -79,8 +80,8 @@ const Routes = () => {
                 />
                 <StackNavigation.Screen
                     options={{ headerShown: false }}
-                    name='Recuperar senha'
-                    component={ForgotPassword}
+                    name='Alterar senha'
+                    component={ChangePassword}
                 />
                 <StackNavigation.Screen
                     options={{ headerShown: false }}
@@ -91,6 +92,11 @@ const Routes = () => {
                     options={{ headerShown: false }}
                     name='Profile'
                     component={Profile}
+                />
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Recuperar senha'
+                    component={ForgotPassword}
                 />
             </StackNavigation.Navigator>
         </NavigationContainer>
