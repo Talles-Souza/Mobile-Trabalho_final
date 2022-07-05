@@ -21,8 +21,8 @@ const ForgotPassword = ({ navigation }) => {
         console.log(name, email, senha);
         const count = parseInt(id, 10)
         const data = {
-            idUsuario: count,
-            nomeUsuario: name,
+            // idUsuario: count,
+            // nomeUsuario: name,
             email: email,
             senha: senha,
         };
@@ -67,20 +67,20 @@ const ForgotPassword = ({ navigation }) => {
 
                 <View><Text style={styles.texto_entrada}>Alterar senha</Text></View>
 
-                <Input inputContainerStyle={styles.inputContainer}
+                {/* <Input inputContainerStyle={styles.inputContainer}
                     placeholder='ID do usuario'
                     onChangeText={setId}
                     value={id}
                     leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
                     placeholderTextColor={'black'}
-                />
-                <Input inputContainerStyle={styles.inputContainer}
+                /> */}
+                {/* <Input inputContainerStyle={styles.inputContainer}
                     placeholder='Nome de usuario'
                     onChangeText={setName}
                     value={name}
                     leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
                     placeholderTextColor={'black'}
-                />
+                /> */}
                 <Input inputContainerStyle={styles.inputContainer}
                     placeholder='Email do usuario'
                     onChangeText={setEmail}

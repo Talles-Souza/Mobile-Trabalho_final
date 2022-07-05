@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Alert, ActivityIndicator, Image } from "react-native";
+import { View, StyleSheet, Alert, ActivityIndicator, Image, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button } from "react-native-elements";
 import Axios from "../../api/axios";
 import { TextInput } from 'react-native';
-
+import { CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 const Register = ({ route, navigation }) => {
 
     const [name, setName] = useState('');
@@ -27,7 +27,7 @@ const Register = ({ route, navigation }) => {
             const formData = new FormData();
             formData.append('usuario', JSON.stringify(data));
             formData.append('file', {
-                uri: "file://C:/mobile-projeto-final/app_residencia/src/assets/bookland.png",//Your Image File Path
+                uri: imageUser,
                 type: 'image/jpeg',
                 name: "imagename.jpg",
             });
@@ -52,7 +52,69 @@ const Register = ({ route, navigation }) => {
     };
 
 
+    const handleImage = () => {
 
+        Alert.alert("Selecione", "informe onde deseja pegar a foto", [
+            {
+
+                text: "Galeria",
+                onPress: () => pickImageFromGalery(),
+                style: 'default'
+
+            },
+            {
+
+                text: "Câmera",
+                onPress: () => pickImageFromCamera(),
+                style: 'default'
+
+            },
+            {
+                // cancelable: true,
+                // onDismiss: () => console.log('arrumar depois ...')
+
+
+            }
+        ]
+        );
+
+
+    };
+
+    const [imageUser, setImageUser] = useState('https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg');
+    const pickImageFromGalery = async () => {
+
+        const options: ImageLibraryOptions = {
+            mediaType: 'photo',
+        }
+        const result = await launchImageLibrary(options);
+        console.log(result);
+
+        //Método para passar a foto para o banco de dados
+        if (result?.assets) {
+            setImageUser(result.assets[0].uri!)
+        }
+
+    }
+
+
+    const pickImageFromCamera = async () => {
+
+        const options: CameraOptions = {
+            mediaType: 'photo',
+            saveToPhotos: false,
+            cameraType: 'front',
+            quality: 1,
+        }
+        const result = await launchCamera(options);
+        console.log(result);
+
+        //Método para passar a foto para o banco de dados
+        // if (result?.assets) {
+        //     setImageUser(result.assets[0].uri!)
+        // }
+
+    }
 
 
 
@@ -62,10 +124,22 @@ const Register = ({ route, navigation }) => {
 
     /* const handleRegister = async (name: string, email: string, senha: string) => {
          console.log(`Nome: ${name} - Email : ${email} - Senha : ${senha}`);*/
+    console.log("Imagem", imageUser);
 
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('../../assets/register.png')} />
+            {/* <Image style={styles.logo} source={require('../../assets/register.png')} /> */}
+
+
+            <TouchableOpacity
+                onPress={handleImage}
+            >
+                <Image style={styles.logo} source={{ uri: imageUser }} />
+                <Icon name={"edit"} size={30} />
+
+            </TouchableOpacity>
+
+
             <Text style={styles.texto_entrada}>{'Cadastro'}</Text>
 
             <Input inputContainerStyle={styles.inputContainer}
@@ -92,6 +166,11 @@ const Register = ({ route, navigation }) => {
                 secureTextEntry
 
             />
+            <TouchableOpacity
+
+            >
+
+            </TouchableOpacity>
             <Button
                 title='Registrar'
                 onPress={() => handleRegister(name, email, senha)}
@@ -102,7 +181,6 @@ const Register = ({ route, navigation }) => {
 
             <Button
                 title="Voltar"
-
                 onPress={() => navigation.navigate('Login')}
                 titleStyle={styles.buttons_text2}
                 buttonStyle={styles.back_button}
@@ -116,9 +194,9 @@ const Register = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#A2717C',
+        backgroundColor: '#fcfcfc',
         padding: 16,
-        alignItems: 'stretch',
+        alignItems: 'center',
         justifyContent: 'center'
     },
     texto_entrada: {
@@ -131,12 +209,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 230,
-        height: 185,
-        marginLeft: 100,
+        width: 200,
+        height: 200,
+        borderRadius: 100
+
     },
     inputContainer: {
-        backgroundColor: '#F9F6F6',
+        backgroundColor: '#e0dada',
         padding: 5,
         borderRadius: 10,
     },
@@ -166,7 +245,8 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         width: 110,
         padding: 4,
-        backgroundColor: '#FFFFFF',
+
+        backgroundColor: '#ffffff',
         borderRadius: 9,
     },
 
