@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { View, StyleSheet, Alert, ActivityIndicator, Image, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button } from "react-native-elements";
 import Axios from "../../api/axios";
-import { TextInput } from 'react-native';
+
 import { CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 const Register = ({ route, navigation }) => {
 
@@ -158,6 +158,8 @@ const Register = ({ route, navigation }) => {
                 placeholderTextColor={'black'}
             />
             <Input inputContainerStyle={styles.inputContainer}
+                //ternario isFocused ? styles_1 : styles_2
+                //onFocus={}
                 placeholder='Senha'
                 onChangeText={setSenha}
                 value={senha}
@@ -218,12 +220,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         padding: 5,
         borderRadius: 10,
-        borderColor: '#854553'
+        borderColor: '#000000'
     },
     buttons: {
         width: 360,
         marginLeft: 10,
-        backgroundColor: '#854553',
+        backgroundColor: '#562637',
         padding: 15,
         borderRadius: 10,
     },

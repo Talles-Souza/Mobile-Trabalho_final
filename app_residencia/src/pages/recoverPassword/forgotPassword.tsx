@@ -55,7 +55,7 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#A2717C',
+        backgroundColor: '#ffffff',
         padding: 16,
         alignItems: 'center',
         justifyContent: 'center',

@@ -7,6 +7,7 @@ import { AutenticacaoContext } from "../../context/AutenticacaoContext";
 
 
 const Login = ({ navigation }: any) => {
+    const [focus, SetFocus] = useState(false);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const { login } = useContext(AutenticacaoContext);
@@ -32,12 +33,15 @@ const Login = ({ navigation }: any) => {
         }
     }
 
+
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../../assets/bookland.png')} />
             <Text style={styles.texto_entrada}>{'Login'}</Text>
             <Input inputContainerStyle={styles.inputContainer}
                 placeholder='E-mail'
+                //ternario isFocused ? styles_1 : styles_2
+
                 onChangeText={setEmail}
                 value={email}
                 leftIcon={<Icon name='email' color='#000' type='Entypo' size={24} />}
@@ -50,6 +54,8 @@ const Login = ({ navigation }: any) => {
                 leftIcon={<Icon name="vpn-key" color="#000000" type="MaterialIcons" size={24} />}
                 placeholderTextColor={'black'}
                 secureTextEntry
+
+
             />
             {isLoading === false ?
                 <Button
@@ -57,7 +63,7 @@ const Login = ({ navigation }: any) => {
                     onPress={() => { handleLogin(email, senha); setLoading(true) }}
                     titleStyle={styles.buttons_text}
                     buttonStyle={styles.buttons}
-                /> : <ActivityIndicator size="large" color="#fff" />}
+                /> : <ActivityIndicator size="large" color="#d81b1b" />}
             <View style={styles.container_buttons}>
                 <Button
                     title='Cadastro'
@@ -66,7 +72,7 @@ const Login = ({ navigation }: any) => {
                     buttonStyle={styles.button_cadastro}
                 />
                 {<Button
-                    title='Esqueceu a senha?'
+                    title='Recuperar'
                     onPress={() => navigation.navigate('Recuperar senha')}
                     buttonStyle={styles.button_recuperar}
                     titleStyle={styles.buttons_text3}
@@ -97,6 +103,18 @@ const styles = StyleSheet.create({
         height: 200,
         marginLeft: 50,
     },
+    inputContainer1: {
+
+        backgroundColor1: '#ffffff',
+        marginTop: 10,
+        padding: 5,
+        borderColor: '#854553',
+        borderStyle: "solid",
+        borderWidth: 2,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderRadius: 20,
+    },
     inputContainer: {
         backgroundColor: '#ffffff',
         marginTop: 10,
@@ -106,7 +124,7 @@ const styles = StyleSheet.create({
     buttons: {
         width: 360,
         marginLeft: 10,
-        backgroundColor: '#854553',
+        backgroundColor: '#562637',
         padding: 15,
         borderRadius: 10,
     },
@@ -130,7 +148,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 140,
         padding: 13,
-        backgroundColor: '#854553',
+        backgroundColor: '#562637',
         borderRadius: 9,
     },
     button_recuperar: {
@@ -138,7 +156,7 @@ const styles = StyleSheet.create({
         width: 180,
         padding: 13,
         borderRadius: 9,
-        backgroundColor: '#854553',
+        backgroundColor: '#562637',
     },
 });
 export default Login;
