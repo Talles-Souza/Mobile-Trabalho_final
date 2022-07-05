@@ -26,11 +26,11 @@ const Register = ({ route, navigation }) => {
         try {
             const formData = new FormData();
             formData.append('usuario', JSON.stringify(data));
-            // formData.append('file', {
-            //     uri: "file://C:/mobile-projeto-final/app_residencia/src/assets/bookland.png",//Your Image File Path
-            //     type: 'image/jpeg',
-            //     name: "imagename.jpg",
-            // });
+            formData.append('file', {
+                uri: imageUser,
+                type: 'image/jpeg',
+                name: "imagename.jpg",
+            });
             const config = {
                 headers: {
                     'Content-type': 'multipart/form-data'
@@ -81,7 +81,7 @@ const Register = ({ route, navigation }) => {
 
     };
 
-    const [imageUser, setImageUser] = useState('');
+    const [imageUser, setImageUser] = useState('https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg');
     const pickImageFromGalery = async () => {
 
         const options: ImageLibraryOptions = {
@@ -128,8 +128,16 @@ const Register = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('../../assets/register.png')} />
-            {/* <Image style={styles.logo} source={{ uri: imageUser }} />*/}
+            {/* <Image style={styles.logo} source={require('../../assets/register.png')} /> */}
+
+
+            <TouchableOpacity
+                onPress={handleImage}
+            >
+                <Image style={styles.logo} source={{ uri: imageUser }} />
+                <Icon name={"edit"} size={30} />
+
+            </TouchableOpacity>
 
 
             <Text style={styles.texto_entrada}>{'Cadastro'}</Text>
@@ -162,12 +170,6 @@ const Register = ({ route, navigation }) => {
 
             >
 
-                <Button
-                    onPress={handleImage}
-                    title='Selecionar foto'
-
-                />
-
             </TouchableOpacity>
             <Button
                 title='Registrar'
@@ -179,7 +181,6 @@ const Register = ({ route, navigation }) => {
 
             <Button
                 title="Voltar"
-
                 onPress={() => navigation.navigate('Login')}
                 titleStyle={styles.buttons_text2}
                 buttonStyle={styles.back_button}
@@ -193,9 +194,9 @@ const Register = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#A2717C',
+        backgroundColor: '#fcfcfc',
         padding: 16,
-        alignItems: 'stretch',
+        alignItems: 'center',
         justifyContent: 'center'
     },
     texto_entrada: {
@@ -208,12 +209,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 230,
-        height: 185,
-        marginLeft: 100,
+        width: 200,
+        height: 200,
+        borderRadius: 100
+
     },
     inputContainer: {
-        backgroundColor: '#F9F6F6',
+        backgroundColor: '#e0dada',
         padding: 5,
         borderRadius: 10,
     },
@@ -243,7 +245,8 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         width: 110,
         padding: 4,
-        backgroundColor: '#FFFFFF',
+
+        backgroundColor: '#ffffff',
         borderRadius: 9,
     },
 
