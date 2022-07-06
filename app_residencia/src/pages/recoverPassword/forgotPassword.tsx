@@ -28,6 +28,7 @@ const ForgotPassword = ({ navigation }) => {
             <Input
                 style={styles.input}
                 placeholder='E-mail'
+                placeholderTextColor={'black'}
                 onChangeText={(t) => setEmail(t)}
 
             />

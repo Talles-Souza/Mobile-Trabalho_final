@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 270,
-        height: 200,
-        marginLeft: 50,
+        width: 370,
+        height: 250,
+
     },
     inputContainer1: {
 
