@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-native-paper';
-import { Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-elements';
 
 const CardCategories = ({ dados, navigation }) => {
@@ -22,10 +22,11 @@ const CardCategories = ({ dados, navigation }) => {
         flex: 1,
         display: 'flex',
         width: 150, height: 150,
-        backgroundColor: '#AF6B79',
+        backgroundColor: '#562637',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 30,
+        marginTop: 20,
+
 
     },
     cardNome: {
@@ -48,10 +49,10 @@ const CardCategories = ({ dados, navigation }) => {
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 18,
+        paddingTop: 27,
         paddingRight: 5,
 
-    }
+    },
 })
 
 export default CardCategories;

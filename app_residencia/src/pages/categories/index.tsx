@@ -72,6 +72,7 @@ const Categories = ({ route, navigation }) => {
             </View> */}
 
             </View>
+
         </View>
     );
 }
@@ -81,7 +82,9 @@ const Categories = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgba(201, 167, 174, 1)',
+        height: 180,
+        backgroundColor: '#ffffff',
+        padding: 12,
     },
     container2: {
 
