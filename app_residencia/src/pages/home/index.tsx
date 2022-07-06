@@ -48,26 +48,26 @@ const Home = ({ route, navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-           
-                <View style={styles.box}>
-                    {/* <MyHeader /> */}
-                    <MySearch />
-                    <CarouselHome />
-                    <MyCard />
-                    <FlatList
-                        data={produtos}
-                        keyExtractor={item => item.idProduto}
-                        numColumns={numColumns}
 
-                        renderItem={({ item }) =>
-                            <CardProduct
-                                dados={item}
-                                navigation={navigation}
-                            />
-                        }
-                    />
-                </View>
-           
+            <View style={styles.box}>
+                {/* <MyHeader /> */}
+                <MySearch />
+                <CarouselHome />
+                <MyCard />
+                <FlatList
+                    data={produtos}
+                    keyExtractor={item => item.idProduto}
+                    numColumns={numColumns}
+
+                    renderItem={({ item }) =>
+                        <CardProduct
+                            dados={item}
+                            navigation={navigation}
+                        />
+                    }
+                />
+            </View>
+
         </ScrollView>
 
     );
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
-        
+
     },
 
 

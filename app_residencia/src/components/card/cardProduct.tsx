@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 import { TouchableOpacity, Image, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
@@ -16,8 +16,8 @@ const CardProduct = ({ dados }) => {
             <Card containerStyle={styles.container1} >
                 <Image source={{ uri: dadosProduto.imagemProduto }} style={styles.imagem} />
                 <Card.Divider />
-                <Card.Title>
-                    <Text>{dadosProduto.nomeProduto}</Text>
+                <Card.Title >
+                    <Text >{dadosProduto.nomeProduto}</Text>
                 </Card.Title>
                 <View style={styles.icones}>
                     <Text style={{ color: "black", }}>R$ {dadosProduto.precoProduto}</Text>

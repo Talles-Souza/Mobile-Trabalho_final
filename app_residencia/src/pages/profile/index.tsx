@@ -12,32 +12,58 @@ const Profile = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.circulo}>
-                <Image style={styles.fotoPerfil} source={require('../../assets/bookland.png')} />
-            </View>
-            <View style={styles.square}>
-                <View style={styles.views_do_nome_email}>
-                    <Text style={styles.textName}>Nome do Usuário: {usuario.name}</Text>
-                    <Text style={styles.textName}>Email: {usuario.email}</Text>
-                    <Text style={styles.textName}>Senha:*********** </Text>
+            <View style={styles.card}>
+
+                <Text style={styles.linha} numberOfLines={1}>
+                    _____________________________________________________
+                </Text>
+
+                <View style={styles.fileira}>
+                    <Text style={styles.avatar}>Avatar</Text>
+                    <Image style={styles.fotoPerfil} source={require('../../assets/bookland.png')} />
                 </View>
-                <TextInput style={styles.inputContainer}
-                    placeholder={descricao}
-                    multiline={true}
-                    value={descricao}
-                    onChangeText={(descricao) => setDescricao(descricao)}
-                    placeholderTextColor={'black'}
+
+                <Text style={styles.linha} numberOfLines={1}>
+                    _____________________________________________________
+                </Text>
+
+                <View style={styles.fileira}>
+                    <Text style={styles.avatar}>E-mail</Text>
+                    <Text style={styles.avatar}>{usuario.email}</Text>
+                </View>
+
+                <Text style={styles.linha} numberOfLines={1}>
+                    _____________________________________________________
+                </Text>
+
+                <View style={styles.fileira}>
+                    <Text style={styles.avatar}>Nome de Usuário</Text>
+                    <Text style={styles.avatar}>{usuario.name}</Text>
+                </View>
+
+                <Text style={styles.linha} numberOfLines={1}>
+                    _____________________________________________________
+                </Text>
+
+                <View style={styles.fileira}>
+                    <Text style={styles.avatar}>Senha</Text>
+                    <Text style={styles.avatar}>*******</Text>
+                </View>
+
+                <Text style={styles.linha} numberOfLines={1}>
+                    _____________________________________________________
+                </Text>
+
+                <Button
+                    title='Alterar senha'
+                    onPress={() => navigation.navigate('Alterar senha')}
+                    buttonStyle={styles.button_recuperar}
+                    titleStyle={styles.buttons_text3}
 
                 />
 
-            </View>
 
-            <Button
-                title='Alterar senha'
-                onPress={() => navigation.navigate('Alterar senha')}
-                buttonStyle={styles.button_recuperar}
-                titleStyle={styles.buttons_text3}
-            />
+            </View>
         </View>
     );
 }
@@ -47,75 +73,64 @@ const Profile = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f8f6f6',
         padding: 16,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
 
     },
-    circulo: {
+    card: {
         backgroundColor: '#ffffff',
-        borderRadius: 150,
-        width: 250,
-        height: 250,
-    },
-    square: {
-        backgroundColor: '#e0dada',
-        width: '100%',
-        height: 250,
-        justifyContent: 'center',
+        padding: 16,
+        width: 350,
+        height: 400,
         alignItems: 'center',
-        marginTop: 50,
-        borderRadius: 40,
-    },
-    button_edit: {
-        backgroundColor: '#A2717C',
-        marginTop: 10,
-        cursor: 'pointer',
-    },
-    button_editTittle: {
-        fontSize: 20,
-    },
-    inputContainer: {
-        backgroundColor: '#ffffff',
-        width: 300,
-        padding: 30,
         borderRadius: 10,
-        fontSize: 15,
-    },
-    textName: {
-        color: '#121212',
-        backgroundColor: '#fff',
-        fontWeight: 'bold',
+
+        shadowColor: '#161616',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        elevation: 5,
 
     },
-    textName2: {
-        color: '#121212',
-        backgroundColor: '#fff',
+    fileira: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 15,
     },
     fotoPerfil: {
         borderRadius: 150,
-        width: 250,
-        height: 250,
+        width: 50,
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#333',
     },
-    views_do_nome_email: {
-        backgroundColor: '#ffffff',
-        padding: 10,
-        width: 300,
-        height: 80,
-        borderRadius: 10,
-        marginBottom: 25,
+    avatar: {
+        fontSize: 18,
+        fontWeight: 'bold',
+
+    },
+    linha: {
+        width: 352,
+        color: '#f8f6f6',
     },
     buttons_text3: {
         fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000000',
+
     },
     button_recuperar: {
-        marginTop: 30,
-        width: 180,
-        padding: 13,
-        borderRadius: 9,
-        backgroundColor: '#562637',
+        marginTop: 25,
+        paddingRight: 10,
+        backgroundColor: '#ffffff',
+        border: 1,
+        borderColor: '#000000',
+
     },
+
 });
 
 export default Profile;
