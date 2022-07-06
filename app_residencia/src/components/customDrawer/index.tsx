@@ -17,55 +17,60 @@ const DrawerContent = (props: any) => {
                             icon={() => (
                                 <Icon
                                     name="home"
-                                    color={'black'}
+                                    color={'white'}
                                     size={26}
                                 />
                             )}
                             label="Home"
+                            labelStyle={{ color: '#ffffff' }}
                             onPress={() => { props.navigation.navigate('Home') }}
                         />
                         <DrawerItem style={styles.box}
                             icon={({ size }) => (
                                 <Icon
                                     name="category"
-                                    color={'black'}
+                                    color={'white'}
                                     size={size}
                                 />
                             )}
                             label="Categorias"
+                            labelStyle={{ color: '#ffffff' }}
                             onPress={() => { props.navigation.navigate('Categorias') }}
                         />
                         <DrawerItem style={styles.box}
                             icon={() => (
                                 <Icon
                                     name="heart" type='ant-design'
-                                    color={'black'}
+                                    color={'white'}
                                     size={22}
                                 />
                             )}
                             label="Favoritos"
+                            labelStyle={{ color: '#ffffff' }}
                             onPress={() => { props.navigation.navigate('BookmarkScreen') }}
                         />
                         <DrawerItem style={styles.box}
                             icon={() => (
                                 <Icon
                                     name="shopping-cart"
-                                    color={'black'}
+                                    color={'white'}
                                     size={24}
                                 />
                             )}
                             label="Carrinho"
+                            labelStyle={{ color: '#ffffff' }}
                             onPress={() => { props.navigation.navigate('SettingsScreen') }}
                         />
                         <DrawerItem style={styles.box}
                             icon={() => (
                                 <Icon
                                     name='user-alt' type='font-awesome-5'
-                                    color={'black'}
+                                    color={'white'}
                                     size={19}
                                 />
                             )}
                             label='Perfil'
+                            labelStyle={{ color: '#ffffff' }}
                             onPress={() => { props.navigation.navigate('Profile') }}
                         />
                     </Drawer.Section>
@@ -94,7 +99,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FCF9F9',
     },
     box: {
-        backgroundColor: '#AF7B85',
+        backgroundColor: '#562637',
         marginBottom: 13,
     },
 

@@ -95,14 +95,14 @@ const ChangePassword = ({ navigation }) => {
                     placeholder='Nova senha'
                     onChangeText={setSenha}
                     value={senha}
-                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    leftIcon={<Icon name='key' color='#000' type='font-awesome' size={24} />}
                     placeholderTextColor={'black'}
                 />
                 <Input inputContainerStyle={styles.inputContainer}
                     placeholder='Confirmar senha'
                     onChangeText={setSenha2}
                     value={senha2}
-                    leftIcon={<Icon name='user' color='#000' type='font-awesome' size={24} />}
+                    leftIcon={<Icon name='key' color='#000' type='font-awesome' size={24} />}
                     placeholderTextColor={'black'}
                 />
 
@@ -129,7 +129,7 @@ export default ChangePassword;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#A2717C',
+        backgroundColor: '#ffffff',
         padding: 16,
         alignItems: 'center',
         justifyContent: 'center',
@@ -187,8 +187,8 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     buttons: {
-        color: '#000',
-        backgroundColor: 'rgba(133, 69, 83, 1)',
+        color: '#ffffff',
+        backgroundColor: '#562637',
         borderRadius: 5,
         width: '70%',
         height: 50,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         height: 300,
     },
     inputContainer: {
-        backgroundColor: '#F9F6F6',
+        backgroundColor: '#ffffff',
         padding: 5,
         borderRadius: 10,
     }
