@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import MyCard from "../../components/card/card";
-import { View, FlatList, ScrollView } from "react-native";
+import { View, FlatList, ScrollView, StyleSheet, RefreshControl } from "react-native";
 import { Title } from "react-native-paper";
 import Axios from "../../api/axios";
+import CarouselHome from "../../components/carousel";
 import { AutenticacaoContext } from "../../context/AutenticacaoContext";
 import MySearch from '../../components/search';
+import CardProduct from "../../components/card/cardProduct";
 
 
 type CategoriaType = {
@@ -13,41 +15,12 @@ type CategoriaType = {
     nomeImagem: string;
 }
 
-//CONSUMO DE API DA HOME BASICAMENTE PRONTO, ENTÃO QUEM FOR FAZER, PRECISA APENAS TRAZER OS COMPONENTS
-// QUE VAO SER ULTIZADOS NA PAG, PARA QUE EU POSSA FAZER O MAP
-//PRETENDO TIRAR OS CONSUMOS DE API DA PAGINA E COLOCAR NOS COMPONENTES, POSTERIORMENTE 
-//OS CONSUMOS ENTÃO COMENTADOS, ENTAO PODEM COLOCAR OS COMPONENTES SEM PREOCUPAÇÃO 
-
 const Home = ({ route, navigation }) => {
 
-
-
-
-    //Get categoria, CONSUMO DE API PRONTO, FAVOR NAO MEXER
+    const numColumns = 2;
+    const [loading, setLoading] = useState(false);
     const { usuario } = useContext(AutenticacaoContext);
-    // const { token } = route.params;
-    const [categorias, setCategoria] = useState<any[]>([]);
 
-    useEffect(() => {
-        getDadosCategoria();
-    }, []);
-
-    const getDadosCategoria = async () => {
-        Axios.get(
-            '/categoria',
-            { headers: { "Authorization": `Bearer ${usuario.token}` } }
-
-        ).then(result => {
-            console.log("dados das categorias" + JSON.stringify(result.data));
-            setCategoria(result.data)
-        }).catch((error) => {
-            console.log("Erro ao carregar " + JSON.stringify(error));
-
-        });
-    }
-
-
-    //Get Produto, CONSUMO DE API PRONTO, FAVOR NAO MEXER
 
     const [produtos, setProduto] = useState<any[]>([]);
 
@@ -72,59 +45,45 @@ const Home = ({ route, navigation }) => {
 
     console.log('Token' + usuario.token);
 
+
     return (
-        <ScrollView >
-            {/* <MyHeader /> */}
+        <ScrollView style={styles.container}>
+           
+                <View style={styles.box}>
+                    {/* <MyHeader /> */}
+                    <MySearch />
+                    <CarouselHome />
+                    <MyCard />
+                    <FlatList
+                        data={produtos}
+                        keyExtractor={item => item.idProduto}
+                        numColumns={numColumns}
 
-            <MySearch />
-
-            {/* <FlatList
-                horizontal={true}
-                data={categorias}
-                keyExtractor={item => item.idCategoria}
-                renderItem={({ item }) =>
-                    <MyCard
-                        dados={item}
-                        navigation={navigation}
+                        renderItem={({ item }) =>
+                            <CardProduct
+                                dados={item}
+                                navigation={navigation}
+                            />
+                        }
                     />
-                } */}
-
-            {/* <ScrollView horizontal={true}>
-                {categorias.map((categoria, indice) => (
-                    <MyCard
-                        key={indice}
-                        dados={categoria}
-                    />))}
-            </ScrollView> */}
-
-
-            <View style={{ display: 'flex', marginTop: 15, marginLeft: 15 }}>
-                <Title>Recente</Title>
-            </View>
-
-
-            {/* <FlatList
-                horizontal={true}
-                data={produtos}
-                keyExtractor={item => item.idProduto}
-                renderItem={({ item }) =>
-                    <MyCardImg
-                        dados={item}
-                        navigation={navigation}
-                    />
-                }
-            /> */}
-
-            {/* <ScrollView horizontal={true}>
-                {produtos.map((produto, indice) => (
-                    <MyCardImg
-                        key={indice}
-                        dados={produto}
-                    />))}
-            </ScrollView> */}
-
-
+                </View>
+           
         </ScrollView>
+
     );
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    box: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+        
+    },
+
+
+})
+
 export default Home;

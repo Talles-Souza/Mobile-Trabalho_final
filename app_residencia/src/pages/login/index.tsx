@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Alert, ActivityIndicator, Image } from "react-native";
+import { View, StyleSheet, Alert, ActivityIndicator, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Button, Icon, Input, Text } from "react-native-elements";
 import { AutenticacaoContext } from "../../context/AutenticacaoContext";
 
@@ -35,50 +35,44 @@ const Login = ({ navigation }: any) => {
 
 
     return (
-        <View style={styles.container}>
-            <Image style={styles.logo} source={require('../../assets/bookland.png')} />
-            <Text style={styles.texto_entrada}>{'Login'}</Text>
-            <Input inputContainerStyle={styles.inputContainer}
-                placeholder='E-mail'
-                //ternario isFocused ? styles_1 : styles_2
+        <ScrollView>
+            <View style={styles.container}>
+                <Image style={styles.logo} source={require('../../assets/bookland.png')} />
+                <Text style={styles.texto_entrada}>{'Login'}</Text>
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='E-mail'
+                    //ternario isFocused ? styles_1 : styles_2
 
-                onChangeText={setEmail}
-                value={email}
-                leftIcon={<Icon name='email' color='#000' type='Entypo' size={24} />}
-                placeholderTextColor={'black'}
-            />
-            <Input inputContainerStyle={styles.inputContainer}
-                placeholder='Senha'
-                onChangeText={setSenha}
-                value={senha}
-                leftIcon={<Icon name="vpn-key" color="#000000" type="MaterialIcons" size={24} />}
-                placeholderTextColor={'black'}
-                secureTextEntry
-
-
-            />
-            {isLoading === false ?
-                <Button
-                    title='Entrar'
-                    onPress={() => { handleLogin(email, senha); setLoading(true) }}
-                    titleStyle={styles.buttons_text}
-                    buttonStyle={styles.buttons}
-                /> : <ActivityIndicator size="large" color="#d81b1b" />}
-            <View style={styles.container_buttons}>
-                <Button
-                    title='Cadastro'
-                    onPress={() => navigation.navigate('Register')}
-                    titleStyle={styles.buttons_text2}
-                    buttonStyle={styles.button_cadastro}
+                    onChangeText={setEmail}
+                    value={email}
+                    leftIcon={<Icon name='email' color='#000' type='Entypo' size={24} />}
+                    placeholderTextColor={'black'}
                 />
-                {<Button
-                    title='Recuperar'
-                    onPress={() => navigation.navigate('Recuperar senha')}
-                    buttonStyle={styles.button_recuperar}
-                    titleStyle={styles.buttons_text3}
-                />}
+                <Input inputContainerStyle={styles.inputContainer}
+                    placeholder='Senha'
+                    onChangeText={setSenha}
+                    value={senha}
+                    leftIcon={<Icon name="vpn-key" color="#000000" type="MaterialIcons" size={24} />}
+                    placeholderTextColor={'black'}
+                    secureTextEntry
+
+
+                />
+
+                <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('Recuperar senha')}><Text style={styles.texttouch}>Esqueci minha senha</Text></TouchableOpacity>
+
+                {isLoading === false ?
+                    <Button
+                        title='Entrar'
+                        onPress={() => { handleLogin(email, senha); setLoading(true) }}
+                        titleStyle={styles.buttons_text}
+                        buttonStyle={styles.buttons}
+                    /> : <ActivityIndicator size="large" color="#d81b1b" />}
+
+                <View style={styles.cont}><Text style={styles.texttouch1}>Ainda não é cadastrado?</Text><TouchableOpacity onPress={() => navigation.navigate('Register')} style={styles.touch1}><Text style={styles.texttouch2}>Registre-se</Text></TouchableOpacity></View>
+
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -87,7 +81,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffffff',
         padding: 16,
-        alignItems: 'stretch',
+        alignItems: 'center',
         justifyContent: 'center'
     },
     texto_entrada: {
@@ -127,6 +121,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#562637',
         padding: 15,
         borderRadius: 10,
+        marginTop: 10
     },
     buttons_text: {
         fontSize: 19,
@@ -158,5 +153,36 @@ const styles = StyleSheet.create({
         borderRadius: 9,
         backgroundColor: '#562637',
     },
+    touch: {
+        height: 50,
+    },
+    texttouch: {
+
+        color: '#0023eb',
+        fontSize: 17
+    },
+    texttouch2: {
+        marginTop: 10,
+        color: '#0023eb',
+        fontSize: 17,
+        marginLeft: 10
+    },
+    touch1: {
+        height: 50,
+
+
+    },
+    texttouch1: {
+
+        marginTop: 10,
+        fontSize: 17
+    },
+    cont: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    }
+
 });
 export default Login;
