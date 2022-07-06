@@ -25,13 +25,11 @@ const ForgotPassword = ({ navigation }) => {
         <View style={styles.container}>
             <Image style={styles.imagem} resizeMode='stretch' source={{ uri: 'https://media.discordapp.net/attachments/989667114665267250/992642226259771422/Autenticacao-imagem-sem_fundo.png' }} />
             <Text style={styles.texto_entrada}>Recuperar senha</Text>
-            <TextInput
+            <Input
                 style={styles.input}
                 placeholder='E-mail'
-                keyboardType='email-address'
-                returnKeyType='next'
                 onChangeText={(t) => setEmail(t)}
-                autoFocus={true}
+
             />
             <Button
                 title='Recuperar'
@@ -55,7 +53,7 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#A2717C',
+        backgroundColor: '#ffffff',
         padding: 16,
         alignItems: 'center',
         justifyContent: 'center',
@@ -76,7 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         fontSize: 16,
         marginTop: 40,
-        borderRadius: 5,
+        borderRadius: 35,
         textAlign: 'center',
         color: '#000000'
     },
@@ -105,15 +103,15 @@ const styles = StyleSheet.create({
         color: '#000000',
 
         borderRadius: 5,
-        width: '40%',
+        width: 50,
         height: 50,
         paddingTop: 10,
-        fontSize: 11,
+        fontSize: 13,
         marginTop: 5,
     },
     buttons: {
-        color: '#000',
-        backgroundColor: 'rgba(133, 69, 83, 1)',
+        color: '#ffffff',
+        backgroundColor: '#562637',
         borderRadius: 5,
         width: '70%',
         height: 50,
