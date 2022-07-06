@@ -101,6 +101,9 @@ const Home = ({ route, navigation }) => {
             <View style={{ display: 'flex', marginTop: 15, marginLeft: 15 }}>
                 <Title>Recente</Title>
             </View>
+            
+            
+
 
 
             {/* <FlatList
