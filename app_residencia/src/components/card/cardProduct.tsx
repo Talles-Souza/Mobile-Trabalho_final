@@ -9,10 +9,11 @@ import { CarrinhoContext } from '../../context/carrinhoContext';
 const CardProduct = ({ dados, navigation }) => {
 
     const dadosProduto = dados;
-    console.log(dadosProduto);
+    // console.log(dadosProduto);
 
     const handleAddProduto = () => {
         adicionarProduto(
+            dadosProduto.idProduto,
             dadosProduto.sku,
             dadosProduto.nomeProduto,
             dadosProduto.descricaoProduto,
