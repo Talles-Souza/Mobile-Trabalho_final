@@ -12,19 +12,43 @@ import { TouchableOpacity } from 'react-native-ui-lib';
 
 const DetalhesProduto = ({ route, navigation }) => {
     const [descricao, setDescricao] = useState('Adicione sua descrição:');
-    const { usuario, adicionarCarrinho, adicionarFavoritos } = useContext(AutenticacaoContext);
-    const { produto } = useContext(CarrinhoContext);
+    const { usuario } = useContext(AutenticacaoContext);
+    const { produto, adicionarProduto, adicionarFavorito } = useContext(CarrinhoContext);
 
 
-    function comprar() {
-        Alert.alert('Comprar');
-        console.log('Comprar');
-    }
+    const handleAddProduto = () => {
+        adicionarProduto(
+            route.params?.id,
+            route.params?.sku,
+            route.params?.nome,
+            route.params?.descricao,
+            route.params?.preco,
+            route.params?.imagem
+        );
+        Alert.alert('Carrinho', 'Produto adicionado ao carrinho', [
+            { text: 'OK', onPress: () => console.log() },
+        ]);
+    };
+    console.log(
+        route.params?.id,
+        route.params?.sku,
+        route.params?.nome,
+        route.params?.descricao,
+        route.params?.preco,
+        route.params?.imagem);
 
-    function adicionarFavorito() {
-        Alert.alert('adicionar favorito');
-        console.log('adicionar favorito');
-    }
+    const handleFav = () => {
+        adicionarFavorito(
+            route.params?.sku,
+            route.params?.nome,
+            route.params?.descricao,
+            route.params?.preco,
+            route.params?.imagem,
+        );
+        Alert.alert('Favoritos', 'Produto adicionado aos Favoritos', [
+            { text: 'OK', onPress: () => console.log() },
+        ]);
+    };
 
     return (
         <ScrollView>
@@ -44,7 +68,7 @@ const DetalhesProduto = ({ route, navigation }) => {
                 <View style={styles.botoes}>
                     <Button
                         title=' Favoritos'
-                        onPressIn={adicionarFavorito}
+                        onPressIn={() => handleFav()}
                         titleStyle={styles.favoritos}
                         buttonStyle={styles.div_fav}
                         icon={() => (
@@ -58,7 +82,7 @@ const DetalhesProduto = ({ route, navigation }) => {
 
                     <Button
                         title='Carrinho'
-                        onPress={comprar}
+                        onPress={() => handleAddProduto()}
                         buttonStyle={styles.button_recuperar}
                         titleStyle={styles.buttons_text3}
 
