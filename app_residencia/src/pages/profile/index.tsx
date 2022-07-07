@@ -6,9 +6,9 @@ import { TextInput } from 'react-native-gesture-handler';
 
 
 const Profile = ({ route, navigation }) => {
+
     const [descricao, setDescricao] = useState('Adicione sua descrição:');
     const { usuario } = useContext(AutenticacaoContext);
-
 
     return (
         <View style={styles.container}>
@@ -61,14 +61,10 @@ const Profile = ({ route, navigation }) => {
                     titleStyle={styles.buttons_text3}
 
                 />
-
-
             </View>
         </View>
     );
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

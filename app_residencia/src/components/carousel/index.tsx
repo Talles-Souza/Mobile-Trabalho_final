@@ -12,7 +12,7 @@ import Carousel from 'react-native-snap-carousel';
 const Item = ({ item }: { item: { image: string } }) => {
     return (
         <View style={styles.slide}>
-            <Image source={{ uri: item.image }} style={{ width: 300, height: 400 }} />
+            <Image source={{ uri: item.image }} style={{ width: 390, height: 290 }} />
         </View>
     );
 };
@@ -20,23 +20,15 @@ const Item = ({ item }: { item: { image: string } }) => {
 const CarouselHome = () => {
     const carousel = [
         {
-            image: 'https://images-na.ssl-images-amazon.com/images/I/91SDZ2eUj+L.jpg',
+            image: 'https://cdn.discordapp.com/attachments/984880566145015868/994426682645688383/3.png',
         },
         {
-            image: 'https://images-na.ssl-images-amazon.com/images/I/61kif0Iav7L.jpg',
+            image: 'https://cdn.discordapp.com/attachments/959624576042696754/994403584840040519/Na_compra_de_dois_livros.png',
         },
         {
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51YO61qiBKL._SX327_BO1,204,203,200_.jpg',
+            image: 'https://cdn.discordapp.com/attachments/984880566145015868/994426651595264020/2.png',
         },
-        {
-            image: 'https://images-na.ssl-images-amazon.com/images/I/71SYepTUsDL.jpg',
-        },
-        {
-            image: 'https://images-na.ssl-images-amazon.com/images/I/71oRXwKU6TL.jpg',
-        },
-        {
-            image: 'https://images-na.ssl-images-amazon.com/images/I/91M9xPIf10L.jpg',
-        },
+ 
     ];
 
     return (
@@ -50,8 +42,8 @@ const CarouselHome = () => {
                 <Carousel
                     data={carousel}
                     renderItem={Item}
-                    sliderWidth={300}
-                    itemWidth={300}
+                    sliderWidth={390}
+                    itemWidth={390}
                     inactiveSlideScale={0.95}
                     inactiveSlideOpacity={1}
                     enableMomentum={true}
@@ -66,7 +58,8 @@ const CarouselHome = () => {
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     container: {
         flex: 1,
@@ -79,7 +72,7 @@ const styles = StyleSheet.create({
     slide: {
         backgroundColor: 'floralwhite',
         borderRadius: 5,
-        height: 400,
+        height: 280,
     },
     title: {
         fontSize: 60,

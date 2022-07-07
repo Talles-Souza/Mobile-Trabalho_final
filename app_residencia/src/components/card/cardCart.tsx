@@ -9,14 +9,14 @@ import { CarrinhoContext } from '../../context/carrinhoContext';
 const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
     const dadosProduto = dados;
     console.log(dadosProduto);
-    const { removerItemProduto, LimparCarrinho, adicionarProduto } = React.useContext(CarrinhoContext)
+    const { removerItemProduto, LimparCarrinho, adicionarProduto,diminuirProduto } = React.useContext(CarrinhoContext)
 
     const removerItem = () => {
         removerItemProduto(dadosProduto.id_produto);
         setRefresh(!refresh);
     }
 
-    const adicionatItem = () => {
+    const adicionarItem = () => {
         adicionarProduto(
             dadosProduto.id_produto,
             dadosProduto.sku,
@@ -24,6 +24,15 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
             dadosProduto.descricao_produto,
             dadosProduto.preco_produto,
             dadosProduto.imagem_produto
+        );
+        setRefresh(!refresh);
+    }
+
+
+    const diminuiItem = () => {
+        diminuirProduto(
+            dadosProduto.id_produto,
+            dadosProduto.preco_produto,
         );
         setRefresh(!refresh);
     }
@@ -41,7 +50,7 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
             
                 <View style={styles.botoes}>
                     <TouchableOpacity style={styles.primeiro}
-                        onPress={() => adicionatItem()}>
+                        onPress={() => adicionarItem()}>
                         <Icon
                             name="plus" type='ant-design'
                             color={'black'}
@@ -49,7 +58,8 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                     onPress={() => diminuiItem()}>
                         <Icon
                             name="minus" type='ant-design'
                             color={'black'}

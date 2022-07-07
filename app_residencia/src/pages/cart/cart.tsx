@@ -33,8 +33,6 @@ const Cart = ({ route, navigation }) => {
             <View style={styles.topo}>
                 <Text style={styles.titulo}>Carrinho de Compras</Text>
             </View>
-
-
             <View style={{ height: 350, marginTop: 0 }}>
                 <FlatList
                     data={carrinho}

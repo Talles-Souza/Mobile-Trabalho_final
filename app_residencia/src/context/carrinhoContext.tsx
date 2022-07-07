@@ -66,6 +66,21 @@ export function CarrinhoProvider({ children }) {
         return realm_carrinho.objects('Favoritos').length;
     };
 
+    const diminuirProduto = (_id: number,_preco:number ) => {
+        const produtoExisteBase = realm_carrinho
+            .objects('Produto')
+            .filtered(`id_externa = ${_id} `)[0];
+
+        if (produtoExisteBase) {
+            if(produtoExisteBase.quantidade === 1) return
+            realm_carrinho.write(() => {
+                produtoExisteBase.quantidade -= 1;
+                produtoExisteBase.preco_produto = _preco
+                produtoExisteBase.total = produtoExisteBase.preco_produto * produtoExisteBase.quantidade
+            });
+        }
+    };
+
     const adicionarProduto = (
         _id: number,
         _sku: string,
@@ -240,7 +255,8 @@ export function CarrinhoProvider({ children }) {
                 contarQtdFavoritos,
                 removerItemFavoritos,
                 ValorTotalCarrinho,
-                somarTotalCarrinho
+                somarTotalCarrinho,
+                diminuirProduto
             }}>
             {children}
         </CarrinhoContext.Provider>
