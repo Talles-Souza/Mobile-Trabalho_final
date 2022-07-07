@@ -69,28 +69,7 @@ const Home = ({ route, navigation }) => {
                 {/* <MyHeader /> */}
                 <BarraPesquisa navigation={navigation} />
                 <CarouselHome />
-                <View>
-                    <Text style={styles.categorias}>Categorias</Text>
-                </View>
-                <FlatList horizontal={true}
-                    data={categoria}
-                    keyExtractor={item => item.idCategoria}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={loading}
-                            onRefresh={getDadosCategoria}
-                            tintColor={'#EEE'}
 
-                        />
-                    }
-
-                    renderItem={({ item }) =>
-                        <CardCategorias
-                            dados={item}
-                            navigation={navigation}
-                        />
-                    }
-                />
 
                 <FlatList
                     data={produtos}
