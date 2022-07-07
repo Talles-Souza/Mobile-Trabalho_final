@@ -19,6 +19,7 @@ type CategoriaType = {
 const Home = ({ route, navigation }) => {
 
     const numColumns = 2;
+
     const [loading, setLoading] = useState(false);
     const { usuario } = useContext(AutenticacaoContext);
     const [categoria, setCategoria] = useState<CategoriaType[]>([]);
@@ -30,6 +31,7 @@ const Home = ({ route, navigation }) => {
     }, []);
 
     const getDadosProduto = async () => {
+
         Axios.get(
             '/produto',
             { headers: { "Authorization": `Bearer ${usuario.token}` } }

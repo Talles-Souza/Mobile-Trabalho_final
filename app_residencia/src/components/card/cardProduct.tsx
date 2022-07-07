@@ -18,7 +18,7 @@ const CardProduct = ({ dados, navigation }) => {
     const { usuario } = useContext(AutenticacaoContext);
 
     const direcionaPesquisa = (produto: any) => {
-        navigation2.navigate("DetalhesDoProduto", { nome: dadosProduto.nomeProduto, imagem: dadosProduto.imagemProduto, preco: dadosProduto.precoProduto, descricao: dadosProduto.descricaoProduto, sku: produto.sku, id: produto.idProduto });
+        navigation2.navigate("DetalhesDoProduto", { nome: dadosProduto.nomeProduto, imagem: dadosProduto.imagemProduto, preco: dadosProduto.precoProduto, descricao: dadosProduto.descricaoProduto });
         console.log('Produto clicado');
     };
     const dadosProduto = dados;
@@ -57,7 +57,7 @@ const CardProduct = ({ dados, navigation }) => {
 
         <View style={styles.container}>
             <Card style={styles.container1}>
-                <TouchableOpacity onPressIn={e => direcionaPesquisa(setProduto(dadosProduto))}>
+                <TouchableOpacity onPressIn={() => direcionaPesquisa(dadosProduto)}>
                     <Image source={{ uri: dadosProduto.imagemProduto }} style={styles.imagem} />
                 </TouchableOpacity>
 
