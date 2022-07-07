@@ -9,6 +9,7 @@ import MySearch from '../../components/search';
 import CardProduct from "../../components/card/cardProduct";
 
 
+
 type CategoriaType = {
     idCategoria: number;
     nomeCategoria: string;
@@ -20,7 +21,7 @@ const Home = ({ route, navigation }) => {
     const numColumns = 2;
     const [loading, setLoading] = useState(false);
     const { usuario } = useContext(AutenticacaoContext);
-
+    
 
     const [produtos, setProduto] = useState<any[]>([]);
 

@@ -6,6 +6,13 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 
 const DrawerContent = (props: any) => {
 
+
+
+
+
+
+
+
     const paperTheme = useTheme();
 
     return (
@@ -59,7 +66,7 @@ const DrawerContent = (props: any) => {
                             )}
                             label="Carrinho"
                             labelStyle={{ color: '#ffffff' }}
-                            onPress={() => { props.navigation.navigate('SettingsScreen') }}
+                            onPress={() => { props.navigation.navigate('Cart') }}
                         />
                         <DrawerItem style={styles.box}
                             icon={() => (
