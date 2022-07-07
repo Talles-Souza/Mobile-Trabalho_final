@@ -7,67 +7,61 @@ import Axios from '../../api/axios';
 import { AutenticacaoContext } from '../../context/AutenticacaoContext';
 import { usePesquisar } from '../../context/PesquisaContext2';
 import { ProdutoType } from '../../models/produtoType';
+import { useNavigation } from '@react-navigation/native';
+import { CarrinhoContext } from '../../context/carrinhoContext';
 
 export default function BarraPesquisa(props) {
     const [pesquisa, setPesquisa] = useState('');
     const [produto, setProduto] = useState<ProdutoType[]>([]);
     const {usuario} = useContext(AutenticacaoContext);
     const pesquisar = usePesquisar();
+    const navigation = useNavigation();
   
     const selecionaPesquisa = (produto: any) => {
-        //pesquisar.Buscar(produto);
-        Alert.alert(produto.nomeProduto);
-        props.navigation.navigate('Home');
+      navigation.navigate("DetalhesDoProduto",{nome:produto.nomeProduto,imagem:produto.imagemProduto,preco:produto.precoProduto,descricao:produto.descricaoProduto});
         setPesquisa("")
         console.log('Produto clicado', pesquisar.pesquisa);
-    
-      };
+      };     
       useEffect(() => {
         getDadosProduto();
       }, []);
-
       const getDadosProduto = async () => {
         Axios.get(`/produto`, {
           headers: {Authorization: `Bearer ${usuario.token}`},
         })
-          .then(result => {
-            // console.log('Dados das categorias:' + JSON.stringify(result.data));
+        .then(result => {
             setProduto(result.data);
-          })
-          .catch(error => {
-            console.log(
-              'Erro ao carregar a lista de produtos!' + JSON.stringify(error),
-            );
-          });
+        })
       };
-
       return (
-        <View style={{flex: 1, paddingLeft: 15, marginTop: 20, paddingRight: 15, alignItems: 'center'}}>
-          <View style={styles.containerPesquisa}>
+        <View style={styles.container}>
+          <View style={styles.container2}>
             <Input
               placeholder="Buscar"
               value={pesquisa}
               onChangeText={setPesquisa}
               inputContainerStyle={styles.inputs}
               placeholderTextColor={'#000000'}
-              
             />
-
           </View>
-          <ScrollView style={styles.resultadoContainer}>
+          <ScrollView style={styles.cont_result}>
             {produto
               .filter(val => {
                 if (pesquisa.length <= 1) {
                   return;
-                } else if (
+                }
+                else if 
+                (
                   val.nomeProduto.toLowerCase().includes(pesquisa.toLowerCase())
-                ) {
+                ) 
+
+                {
                   return val;
                 }
               })
               .map((produto, indice) => (
                 <Text
-                  style={styles.pesquisaResultado}
+                  style={styles.search_result}
                   onPress={e => selecionaPesquisa(produto)}
                   key={indice}>
                   {produto.nomeProduto}
@@ -76,11 +70,9 @@ export default function BarraPesquisa(props) {
           </ScrollView>
         </View>
       );
-
     }
-
     const styles = StyleSheet.create({
-        containerPesquisa: {
+        container2: {
           width: 390,
           backgroundColor: '#ffffff',
           height: 50,
@@ -90,7 +82,6 @@ export default function BarraPesquisa(props) {
           marginBottom:25,
           textAlign: 'center',
           borderBottomWidth: 0,
-          
         },
         inputs: {
           color: 'white',
@@ -99,9 +90,8 @@ export default function BarraPesquisa(props) {
           marginTop:30,
           flex: 1,
           borderBottomWidth: 0
-
         },
-        resultadoContainer: {
+        cont_result: {
           width: '100%',
           marginTop: 5,
           position:'absolute',
@@ -111,7 +101,7 @@ export default function BarraPesquisa(props) {
           backgroundColor: 'white',
           borderRadius: 10,
         },
-        pesquisaResultado: {
+        search_result: {
           width: 270,
           backgroundColor: 'white',
           padding: 12,
@@ -121,4 +111,11 @@ export default function BarraPesquisa(props) {
           borderBottomWidth: 1,
           marginTop:10,
         },
+        container:{
+          flex: 1,
+          paddingLeft: 15,
+          marginTop: 20,
+          paddingRight: 15,
+          alignItems: 'center',
+        }
       });

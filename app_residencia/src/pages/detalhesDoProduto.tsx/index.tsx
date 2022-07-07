@@ -1,5 +1,5 @@
 import React, { useContext, useState, Component } from 'react';
-import { View, StyleSheet, Alert, Image } from "react-native";
+import { View, StyleSheet, Alert, Image, ScrollView } from "react-native";
 import { Text, Button, Input, Icon } from "react-native-elements";
 import { AutenticacaoContext } from '../../context/AutenticacaoContext';
 import { TextInput } from 'react-native-gesture-handler';
@@ -9,20 +9,67 @@ import { CarrinhoContext } from '../../context/carrinhoContext';
 import { TouchableOpacity } from 'react-native-ui-lib';
 
 
+
 const DetalhesProduto = ({ route, navigation }) => {
     const [descricao, setDescricao] = useState('Adicione sua descrição:');
-    const { usuario } = useContext(AutenticacaoContext);
+    const { usuario, adicionarCarrinho, adicionarFavoritos } = useContext(AutenticacaoContext);
+    const { produto } = useContext(CarrinhoContext);
 
 
+    function comprar() {
+        Alert.alert('Comprar');
+        console.log('Comprar');
+    }
+
+    function adicionarFavorito() {
+        Alert.alert('adicionar favorito');
+        console.log('adicionar favorito');
+    }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.topo}>
-                <Text style={styles.titulo}>Detalhes do Produto</Text>
-            </View>
-            <DetalhesDoProduto />
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.topo}>
+                    <Text style={styles.titulo}>Detalhes do Produto</Text>
+                </View>
+                <View style={styles.view_produto_todo}>
+                    <View style={styles.view_foto}>
+                        <Image style={styles.imagem} source={{ uri: route.params?.imagem }} />
+                        <Text style={styles.dinheiro}>{route.params?.nome}</Text>
+                        <Text style={styles.descricao}>         {route.params?.descricao}</Text>
+                        <Text style={styles.preco}>R$:{route.params?.preco}</Text>
+                    </View>
+                </View>
 
-        </View>
+                <View style={styles.botoes}>
+                    <Button
+                        title=' Favoritos'
+                        onPressIn={adicionarFavorito}
+                        titleStyle={styles.favoritos}
+                        buttonStyle={styles.div_fav}
+                        icon={() => (
+                            <Icon
+                                name="heart" type='ant-design'
+                                color={'red'}
+                                size={22}
+                            />
+                        )}
+                    />
+
+                    <Button
+                        title='Carrinho'
+                        onPress={comprar}
+                        buttonStyle={styles.button_recuperar}
+                        titleStyle={styles.buttons_text3}
+
+                    />
+
+                </View>
+
+
+
+            </View>
+        </ScrollView>
     );
 }
 
@@ -45,6 +92,115 @@ const styles = StyleSheet.create({
         fontSize: 25,
         paddingTop: 10,
 
+    },
+    imagem: {
+        width: 200,
+        height: 260,
+
+    },
+    view_produto_todo: {
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 550,
+        width: 400,
+        backgroundColor: '#f1eded',
+    },
+    fotoProduto: {
+        height: 194,
+        width: 132,
+    },
+    view_foto: {
+        height: 200,
+        width: 260,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    box: {
+        backgroundColor: '#AF7B85',
+        marginBottom: 13,
+    },
+    codigo_limpo: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#FFF',
+        textAlign: 'left',
+        marginTop: 10,
+    },
+    dinheiro: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#000000',
+        textAlign: 'left',
+        marginTop: 20,
+    },
+    descricao: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#000000',
+        textAlign: 'left',
+        marginTop: 20,
+    },
+    preco: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#000000',
+        textAlign: 'left',
+        marginTop: 30,
+    },
+
+    div_viewfav: {
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    icone: {
+        marginTop: 10,
+    },
+    favoritos: {
+        fontSize: 18,
+        color: '#000000',
+    }, buttons_text3: {
+        fontSize: 18,
+        color: '#ffffff'
+    },
+
+    central_comprar: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 100,
+    },
+    botoes: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 400,
+        height: 100
+
+
+    },
+    div_fav: {
+        backgroundColor: '#f1eded',
+        width: 150,
+        height: 50,
+        marginTop: 25,
+        marginLeft: 40,
+        borderRadius: 9,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+
+    },
+    button_recuperar: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 25,
+        marginRight: 40,
+        width: 150,
+        height: 50,
+        borderRadius: 9,
+        backgroundColor: '#b41919',
     },
 
 });
