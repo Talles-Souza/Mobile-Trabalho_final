@@ -14,7 +14,7 @@ import Register from "../pages/registration";
 import ChangePassword from "../pages/recoverPassword";
 import Profile from "../pages/profile";
 import ForgotPassword from "../pages/recoverPassword/forgotPassword";
-import { Cart } from "../pages/cart/cart";
+import Cart from "../pages/cart/cart";
 
 const DrawerNavigation = createDrawerNavigator();
 const NavigationDrawer = ({ route, navigation }: any) => {
