@@ -2,22 +2,22 @@ import React, { useContext, useState, Component, useEffect } from 'react';
 import { View, StyleSheet, Alert, Image } from "react-native";
 import { Text, Button, Input, Icon } from "react-native-elements";
 import { AutenticacaoContext } from '../../context/AutenticacaoContext';
-import { TextInput } from 'react-native-gesture-handler';
 import CardFavorites from '../../components/card/cardFavorites';
-import { Card } from 'react-native-paper';
 import { CarrinhoContext } from '../../context/carrinhoContext';
-import { TouchableOpacity } from 'react-native-ui-lib';
 import { FlatList } from 'react-native';
 
 const Favorites = ({ route, navigation }) => {
 
     const [descricao, setDescricao] = useState('Adicione sua descrição:');
     const { usuario } = useContext(AutenticacaoContext);
-    const { listarProdutos, isFetching } = React.useContext(CarrinhoContext)
+    const { listarFavoritos, isFetching } = React.useContext(CarrinhoContext)
+   
     const [refresh, setRefresh] = useState(false);
     const [carrinho, setCarrinho] = useState([]);
+    
+    
     const getDadosCarrinho = () => {
-        setCarrinho(listarProdutos());
+        setCarrinho(listarFavoritos());
     };
     useEffect(() => {
         getDadosCarrinho();
@@ -26,6 +26,7 @@ const Favorites = ({ route, navigation }) => {
 
 
 
+    console.log(listarFavoritos);
 
 
     return (
