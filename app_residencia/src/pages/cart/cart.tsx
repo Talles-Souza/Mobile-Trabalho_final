@@ -10,23 +10,46 @@ import { TouchableOpacity } from 'react-native-ui-lib';
 
 
 const Cart = ({ route, navigation }) => {
+
+
+
     const [descricao, setDescricao] = useState('Adicione sua descrição:');
     const { usuario } = useContext(AutenticacaoContext);
     const [refresh, setRefresh] = useState(false);
+
+
     function comprar() {
         Alert.alert('Comprar');
         console.log('Comprar');
     }
-    const { listarProdutos, isFetching, setIsFetchin, somarTotalCarrinho,contarQtdProdutos } = useContext(CarrinhoContext)
+    const { listarProdutos, isFetching, setIsFetchin, somarTotalCarrinho, contarQtdProdutos, LimparCarrinho } = useContext(CarrinhoContext)
     // console.log(listarProdutos());
 
     const [carrinho, setCarrinho] = useState([]);
     const getDadosCarrinho = () => {
         setCarrinho(listarProdutos());
     };
+    function currencyFormat(num) {
+        return 'R$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, 'R$1,')
+    }
+
+    const finalizar = () => {
+        LimparCarrinho();
+        Alert.alert("Compra realizada com sucesso")
+        navigation.navigate('Home')
+    }
+    const limpar = () => {
+        LimparCarrinho();
+        Alert.alert("Carrinho limpo com sucesso")
+
+    }
+
+
     useEffect(() => {
         getDadosCarrinho();
     }, [refresh]);
+
+
 
     return (
         <View style={styles.container}>
@@ -45,7 +68,7 @@ const Cart = ({ route, navigation }) => {
                                 <CardCart dados={item}
                                     refresh={refresh}
                                     setRefresh={setRefresh}
-                                    
+
                                     navigation={navigation}
                                 />
                             </View>
@@ -57,18 +80,19 @@ const Cart = ({ route, navigation }) => {
             <View style={styles.rodape}>
 
                 <Text style={styles.titulo2}>{`QUANTIDADE DE PRODUTOS: ${contarQtdProdutos()}`} </Text>
-                <Text style={styles.titulo2}>{`VALOR TOTAL: ${somarTotalCarrinho()}`} </Text>
+                <Text style={styles.titulo2}>VALOR TOTAL:{currencyFormat(somarTotalCarrinho())}
+                </Text>
 
                 <View style={styles.botoes}>
                     <Button
                         title='Finalizar Compra'
-                        onPress={comprar}
+                        onPress={() => finalizar()}
                         buttonStyle={styles.button_finalizar}
                         titleStyle={styles.buttons_textFinalizar}
                     />
                     <Button
                         title='Limpar Carrinho'
-                        onPress={comprar}
+                        onPress={() => limpar()}
                         buttonStyle={styles.button_finalizar}
                         titleStyle={styles.buttons_textFinalizar}
                     />

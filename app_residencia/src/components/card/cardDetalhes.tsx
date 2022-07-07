@@ -1,11 +1,14 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { TouchableOpacity, Image, Text } from 'react-native';
 import { StyleSheet, Alert } from 'react-native';
 import { View } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 import { Avatar, Card, Title, Paragraph } from 'react-native-paper';
+import { CarrinhoContext } from '../../context/carrinhoContext';
 
 const DetalhesDoProduto = () => {
+
+    const { produto } = useContext(CarrinhoContext);
 
     function comprar(){
         Alert.alert('Comprar');
@@ -23,8 +26,8 @@ return(
       <View style={styles.view_produto_todo}>
         <View style={styles.view_foto}>
         <Image style={styles.imagem}  source={{ uri: 'https://media.discordapp.net/attachments/983838532844015708/994379981457199154/declinio.jpg?width=371&height=559'}}/>
-        <Text style={styles.dinheiro}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid natus quam saepe. Maiores dolorem excepturi ullam rem nemo blanditiis pariatur?</Text>
-        <Text style={styles.dinheiro2}>R$:50.00</Text>
+        <Text style={styles.dinheiro}>{produto.nome_produto}</Text>
+        <Text style={styles.dinheiro2}>{produto.preco_produto}</Text>
         </View>
       </View>
        

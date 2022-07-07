@@ -16,6 +16,7 @@ import Profile from "../pages/profile";
 import ForgotPassword from "../pages/recoverPassword/forgotPassword";
 import Cart from "../pages/cart/cart";
 import Favorites from "../pages/favorites/favorites";
+import DetalhesProduto from "../pages/detalhesDoProduto.tsx";
 
 const DrawerNavigation = createDrawerNavigator();
 const NavigationDrawer = ({ route, navigation }: any) => {
@@ -120,6 +121,11 @@ const Routes = () => {
                     options={{ headerShown: false }}
                     name='Favoritos'
                     component={Favorites}
+                />
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='DetalhesDoProduto'
+                    component={DetalhesProduto}
                 />
             </StackNavigation.Navigator>
         </NavigationContainer>

@@ -24,18 +24,6 @@ const DrawerContent = (props: any) => {
                             onPress={() => { props.navigation.navigate('Home') }}
                         />
                         <DrawerItem style={styles.box}
-                            icon={({ size }) => (
-                                <Icon
-                                    name="category"
-                                    color={'white'}
-                                    size={size}
-                                />
-                            )}
-                            label="Categorias"
-                            labelStyle={{ color: '#ffffff' }}
-                            onPress={() => { props.navigation.navigate('Categorias') }}
-                        />
-                        <DrawerItem style={styles.box}
                             icon={() => (
                                 <Icon
                                     name="heart" type='ant-design'

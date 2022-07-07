@@ -9,7 +9,7 @@ import { CarrinhoContext } from '../../context/carrinhoContext';
 const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
     const dadosProduto = dados;
     console.log(dadosProduto);
-    const { removerItemProduto, LimparCarrinho, adicionarProduto,diminuirProduto } = React.useContext(CarrinhoContext)
+    const { removerItemProduto, LimparCarrinho, adicionarProduto, diminuirProduto } = React.useContext(CarrinhoContext)
 
     const removerItem = () => {
         removerItemProduto(dadosProduto.id_produto);
@@ -37,6 +37,10 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
         setRefresh(!refresh);
     }
 
+    function currencyFormat(num) {
+        return 'R$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, 'R$1,')
+    }
+
     return (
 
         <View style={styles.card}>
@@ -46,8 +50,8 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
                     {dados.nome_produto}
                 </Text>
 
-                <Text style={styles.preco}>{`${dados.preco_produto} x ${dados.quantidade} = ${dados.total}`}</Text> 
-            
+                <Text style={styles.preco}> {dados.preco_produto} x {dados.quantidade} = {currencyFormat(dados.total)} </Text>
+
                 <View style={styles.botoes}>
                     <TouchableOpacity style={styles.primeiro}
                         onPress={() => adicionarItem()}>
@@ -59,7 +63,7 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                     onPress={() => diminuiItem()}>
+                        onPress={() => diminuiItem()}>
                         <Icon
                             name="minus" type='ant-design'
                             color={'black'}

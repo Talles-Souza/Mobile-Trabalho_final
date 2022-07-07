@@ -4,8 +4,38 @@ import { StyleSheet, Alert } from 'react-native';
 import { View } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 import { Avatar, Card, Title, Paragraph } from 'react-native-paper';
+import { CarrinhoContext } from '../../context/carrinhoContext';
 
-const CardFavorites = ({dados, refresh, setRefresh}) => {
+const CardFavorites = ({ dados, refresh, setRefresh }) => {
+
+    const dadosProduto = dados;
+    const { listarFavoritos, removerItemFavoritos, adicionarProduto } = React.useContext(CarrinhoContext)
+
+    const removerItem = () => {
+        console.log(dadosProduto.id_produto);
+
+        removerItemFavoritos(dadosProduto.id_produto);
+        setRefresh(!refresh);
+        remover()
+
+    }
+
+    const adicionarItem = () => {
+        adicionarProduto(
+            dadosProduto.id_produto,
+            dadosProduto.sku,
+            dadosProduto.nome_produto,
+            dadosProduto.descricao_produto,
+            dadosProduto.preco_produto,
+            dadosProduto.imagem_produto
+        );
+        setRefresh(!refresh);
+        adicionar()
+    }
+
+
+
+
 
     function adicionar() {
         Alert.alert('Adicionado ao Carrinho');
@@ -13,7 +43,7 @@ const CardFavorites = ({dados, refresh, setRefresh}) => {
     }
 
     function remover() {
-        Alert.alert('Removido do Carrinho');
+        Alert.alert('Removido dos Favoritos');
         console.log('Removido do carrinho');
     }
 
@@ -21,22 +51,22 @@ const CardFavorites = ({dados, refresh, setRefresh}) => {
 
         <View style={styles.card}>
 
-            <Image style={styles.imagem} source={{ uri: 'https://media.discordapp.net/attachments/983838532844015708/994379981457199154/declinio.jpg?width=371&height=559' }} />
+            <Image style={styles.imagem} source={{ uri: dadosProduto.imagem_produto }} />
             <View style={styles.direita}>
                 <Text numberOfLines={5} style={{ width: 180, marginLeft: 10, fontWeight: 'bold', fontSize: 17, textAlign: 'center', marginTop: 10, color: '#000' }}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing.
+                    {dadosProduto.nome_produto}
                 </Text>
-                <Text style={styles.preco}>R$100.00</Text>
+                <Text style={styles.preco}>R$ {dadosProduto.preco_produto}</Text>
 
                 <View style={styles.botoes}>
 
                     <Button
                         title="Adicionar ao Carrinho"
-                        onPress={adicionar}
+                        onPress={() => adicionarItem()}
                         buttonStyle={styles.button_finalizar}
                         titleStyle={styles.buttons_textFinalizar}
                     />
-                    <TouchableOpacity style={styles.terceiro} onPress={remover}>
+                    <TouchableOpacity style={styles.terceiro} onPress={() => removerItem()}>
                         <Icon
                             name="delete" type='ant-design'
                             color={'black'}

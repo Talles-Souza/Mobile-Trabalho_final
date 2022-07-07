@@ -20,12 +20,15 @@ const CardCategories = ({ dados, navigation }) => {
 }; const styles = StyleSheet.create({
     container: {
         flex: 1,
+        
         display: 'flex',
-        width: 150, height: 150,
+        width: 110, height: 110,
         backgroundColor: '#562637',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderRadius: 110
 
 
     },
@@ -49,7 +52,7 @@ const CardCategories = ({ dados, navigation }) => {
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 27,
+
         paddingRight: 5,
 
     },
