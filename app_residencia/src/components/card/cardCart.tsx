@@ -38,7 +38,7 @@ const CardCart = ({ dados, navigation, refresh, setRefresh }) => {
     }
 
     function currencyFormat(num) {
-        return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        return 'R$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, 'R$1,')
     }
 
     return (
