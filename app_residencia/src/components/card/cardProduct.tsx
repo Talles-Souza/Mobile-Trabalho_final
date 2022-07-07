@@ -1,13 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TouchableOpacity, Image, Text, Alert } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { CarrinhoContext } from '../../context/carrinhoContext';
+import { useNavigation } from '@react-navigation/native';
+import { ProdutoType } from '../../models/produtoType';
+import Axios from '../../api/axios';
+import { AutenticacaoContext } from '../../context/AutenticacaoContext';
+
 
 const CardProduct = ({ dados, navigation }) => {
 
+    const navigation2 = useNavigation();
+    const [produto, setProduto] = useState<ProdutoType[]>([]);
+    const { usuario } = useContext(AutenticacaoContext);
+
+    const direcionaPesquisa = (produto: any) => {
+        navigation2.navigate("DetalhesDoProduto", { nome: dadosProduto.nomeProduto, imagem: dadosProduto.imagemProduto, preco: dadosProduto.precoProduto, descricao: dadosProduto.descricaoProduto, sku: produto.sku, id: produto.idProduto });
+        console.log('Produto clicado');
+    };
     const dadosProduto = dados;
     // console.log(dadosProduto);
 
@@ -44,7 +57,9 @@ const CardProduct = ({ dados, navigation }) => {
 
         <View style={styles.container}>
             <Card style={styles.container1}>
-                <Image source={{ uri: dadosProduto.imagemProduto }} style={styles.imagem} />
+                <TouchableOpacity onPressIn={e => direcionaPesquisa(setProduto(dadosProduto))}>
+                    <Image source={{ uri: dadosProduto.imagemProduto }} style={styles.imagem} />
+                </TouchableOpacity>
 
                 <Card.Title
                     title={dadosProduto.nomeProduto}
