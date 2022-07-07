@@ -9,10 +9,11 @@ import { CarrinhoContext } from '../../context/carrinhoContext';
 const CardProduct = ({ dados, navigation }) => {
 
     const dadosProduto = dados;
-    console.log(dadosProduto);
+    // console.log(dadosProduto);
 
     const handleAddProduto = () => {
         adicionarProduto(
+            dadosProduto.idProduto,
             dadosProduto.sku,
             dadosProduto.nomeProduto,
             dadosProduto.descricaoProduto,
@@ -37,9 +38,6 @@ const CardProduct = ({ dados, navigation }) => {
         ]);
     };
 
-
-
-
     const { adicionarProduto, adicionarFavorito } = useContext(CarrinhoContext)
 
     return (
@@ -51,7 +49,6 @@ const CardProduct = ({ dados, navigation }) => {
                 <Card.Title
                     title={dadosProduto.nomeProduto}
                     titleStyle={{ flexWrap: 'wrap', flexDirection: 'row', fontSize: 15 }} />
-
 
                 <View style={styles.icones}>
                     <Text style={{ color: "black", marginLeft: 10 }}>R$ {dadosProduto.precoProduto}</Text>
@@ -72,43 +69,25 @@ const CardProduct = ({ dados, navigation }) => {
                     </TouchableOpacity>
                 </View>
             </Card>
-
         </View>
-
-
-
-
-
     );
 }
 
 const styles = StyleSheet.create({
-    card: {
-
-
-    },
     container: {
-
         padding: 7,
         width: 190,
         maxHeight: 330,
         justifyContent: 'center'
-
-
     },
     container1: {
-
         Width: 190,
         height: 300,
-
-
-
     },
     imagem: {
         marginBottom: 10,
         marginTop: 10,
         marginLeft: 12,
-
         width: 150,
         height: 200,
     },
@@ -118,4 +97,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
 export default CardProduct;

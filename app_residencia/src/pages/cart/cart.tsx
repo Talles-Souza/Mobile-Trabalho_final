@@ -1,5 +1,5 @@
-import React, { useContext, useState, Component } from 'react';
-import { View, StyleSheet, Alert, Image } from "react-native";
+import React, { useContext, useState, Component, useEffect } from 'react';
+import { View, StyleSheet, Alert, Image, FlatList } from "react-native";
 import { Text, Button, Input, Icon } from "react-native-elements";
 import { AutenticacaoContext } from '../../context/AutenticacaoContext';
 import { TextInput } from 'react-native-gesture-handler';
@@ -12,25 +12,52 @@ import { TouchableOpacity } from 'react-native-ui-lib';
 const Cart = ({ route, navigation }) => {
     const [descricao, setDescricao] = useState('Adicione sua descrição:');
     const { usuario } = useContext(AutenticacaoContext);
-
+    const [refresh, setRefresh] = useState(false);
     function comprar() {
         Alert.alert('Comprar');
         console.log('Comprar');
     }
-    const { listarProdutos } = useContext(CarrinhoContext)
-    console.log(listarProdutos());
+    const { listarProdutos, isFetching, setIsFetchin, somarTotalCarrinho,contarQtdProdutos } = useContext(CarrinhoContext)
+    // console.log(listarProdutos());
+
+    const [carrinho, setCarrinho] = useState([]);
+    const getDadosCarrinho = () => {
+        setCarrinho(listarProdutos());
+    };
+    useEffect(() => {
+        getDadosCarrinho();
+    }, [refresh]);
 
     return (
         <View style={styles.container}>
             <View style={styles.topo}>
                 <Text style={styles.titulo}>Carrinho de Compras</Text>
             </View>
-            <CardCart />
+            <View style={{ height: 350, marginTop: 0 }}>
+                <FlatList
+                    data={carrinho}
+                    keyExtractor={(item, index) => index.toString()}
+                    refreshing={isFetching}
+                    extraData={carrinho}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View>
+                                <CardCart dados={item}
+                                    refresh={refresh}
+                                    setRefresh={setRefresh}
+                                    
+                                    navigation={navigation}
+                                />
+                            </View>
+                        );
+                    }}
+                />
+            </View>
 
             <View style={styles.rodape}>
 
-                <Text style={styles.titulo2}>QUANTIDADE DE PRODUTOS: </Text>
-                <Text style={styles.titulo2}>VALOR TOTAL: </Text>
+                <Text style={styles.titulo2}>{`QUANTIDADE DE PRODUTOS: ${contarQtdProdutos()}`} </Text>
+                <Text style={styles.titulo2}>{`VALOR TOTAL: ${somarTotalCarrinho()}`} </Text>
 
                 <View style={styles.botoes}>
                     <Button
@@ -59,10 +86,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+
 
     },
     topo: {
-        marginTop: 50,
+        marginTop: 20,
     },
     titulo: {
         fontWeight: 'bold',
@@ -75,21 +105,11 @@ const styles = StyleSheet.create({
         padding: 7.5,
     },
     rodape: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-
-
         backgroundColor: '#ffffff',
         width: 400,
         height: 200,
         borderRadius: 15,
-
-
-
         marginBottom: 20,
-
         shadowColor: '#161616',
         shadowOffset: { width: 100, height: 100 },
         shadowOpacity: 100,
@@ -101,9 +121,10 @@ const styles = StyleSheet.create({
     },
     button_finalizar: {
         width: 180,
-        height: 90,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 10,
 
         borderRadius: 9,
         backgroundColor: '#562637',

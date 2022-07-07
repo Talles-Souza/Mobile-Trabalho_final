@@ -7,8 +7,7 @@ import CarouselHome from "../../components/carousel";
 import { AutenticacaoContext } from "../../context/AutenticacaoContext";
 import MySearch from '../../components/search';
 import CardProduct from "../../components/card/cardProduct";
-
-
+import BarraPesquisa from '../../components/search/index2';
 
 type CategoriaType = {
     idCategoria: number;
@@ -21,7 +20,6 @@ const Home = ({ route, navigation }) => {
     const numColumns = 2;
     const [loading, setLoading] = useState(false);
     const { usuario } = useContext(AutenticacaoContext);
-    
 
     const [produtos, setProduto] = useState<any[]>([]);
 
@@ -43,16 +41,14 @@ const Home = ({ route, navigation }) => {
         });
     }
 
-
     console.log('Token' + usuario.token);
-
 
     return (
         <ScrollView style={styles.container}>
 
             <View style={styles.box}>
                 {/* <MyHeader /> */}
-                <MySearch />
+                <BarraPesquisa navigation={navigation} />
                 <CarouselHome />
                 <MyCard />
                 <FlatList
@@ -68,9 +64,7 @@ const Home = ({ route, navigation }) => {
                     }
                 />
             </View>
-
         </ScrollView>
-
     );
 }
 const styles = StyleSheet.create({
@@ -81,10 +75,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
-
     },
-
-
 })
 
 export default Home;

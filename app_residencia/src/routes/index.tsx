@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { TouchableOpacity, Image, View } from "react-native";
 import { Icon } from "react-native-elements";
-import { Produto } from "../pages/product";
+
 
 import DrawerContent from "../components/customDrawer";
 import Login from "../pages/login";
@@ -15,6 +15,7 @@ import ChangePassword from "../pages/recoverPassword";
 import Profile from "../pages/profile";
 import ForgotPassword from "../pages/recoverPassword/forgotPassword";
 import Cart from "../pages/cart/cart";
+import Favorites from "../pages/favorites/favorites";
 
 const DrawerNavigation = createDrawerNavigator();
 const NavigationDrawer = ({ route, navigation }: any) => {
@@ -24,31 +25,46 @@ const NavigationDrawer = ({ route, navigation }: any) => {
             screenOptions={() => ({
                 headerStyle: {
                     backgroundColor: '#562637',
-                    height: 70,
+                    height: 90,
                 },
             })}
         >
             <DrawerNavigation.Screen
-                name='Bookland' component={Home}
+                name='Home' component={Home}
                 options={{
-                    headerTintColor: '#fff',
-                    drawerActiveTintColor: '#fff',
-                    headerTitle: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
-                    headerRight: () => (
-                        <TouchableOpacity onPress={() => navigation.navigate('')}>
-                            <Icon style={{ marginRight: 10, }} name="shopping-cart" size={35} color="black" />
-
-                        </TouchableOpacity>
-                    ),
+                    headerTintColor: '#FFFFFF',
+                    headerRight: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
                 }}
             />
             <DrawerNavigation.Screen
-                name="CategoriasDrawerScreen"
-                component={Categories}
-                options={{ title: 'Categorias' }}
+                name="Categories" component={Categories}
+                options={{
+                    headerTintColor: '#FFFFFF',
+                    headerRight: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
+                }}
             />
-
-        </DrawerNavigation.Navigator>
+            <DrawerNavigation.Screen
+                name='Profile' component={Profile}
+                options={{
+                    headerTintColor: '#FFFFFF',
+                    headerRight: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
+                }}
+            />
+            <DrawerNavigation.Screen
+                name='Cart' component={Cart}
+                options={{
+                    headerTintColor: '#FFFFFF',
+                    headerRight: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
+                }}
+            />
+            <DrawerNavigation.Screen
+                name='Favorites' component={Favorites}
+                options={{
+                    headerTintColor: '#FFFFFF',
+                    headerRight: () => <Image style={{ width: 110, height: 50, marginLeft: 85, }} source={require('../assets/icone.png')} />,
+                }}
+            />
+        </DrawerNavigation.Navigator >
     )
 }
 
@@ -84,11 +100,7 @@ const Routes = () => {
                     name='Alterar senha'
                     component={ChangePassword}
                 />
-                <StackNavigation.Screen
-                    options={{ headerShown: false }}
-                    name='ProdutoScreen'
-                    component={Produto}
-                />
+
                 <StackNavigation.Screen
                     options={{ headerShown: false }}
                     name='Profile'
@@ -103,6 +115,11 @@ const Routes = () => {
                     options={{ headerShown: false }}
                     name='Recuperar senha'
                     component={ForgotPassword}
+                />
+                <StackNavigation.Screen
+                    options={{ headerShown: false }}
+                    name='Favoritos'
+                    component={Favorites}
                 />
             </StackNavigation.Navigator>
         </NavigationContainer>

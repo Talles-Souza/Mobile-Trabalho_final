@@ -6,15 +6,6 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 
 const DrawerContent = (props: any) => {
 
-
-
-
-
-
-
-
-    const paperTheme = useTheme();
-
     return (
         <View style={{ flex: 1, backgroundColor: '#FCF9F9' }}>
             <DrawerContentScrollView {...props}>
@@ -54,7 +45,7 @@ const DrawerContent = (props: any) => {
                             )}
                             label="Favoritos"
                             labelStyle={{ color: '#ffffff' }}
-                            onPress={() => { props.navigation.navigate('BookmarkScreen') }}
+                            onPress={() => { props.navigation.navigate('Favorites') }}
                         />
                         <DrawerItem style={styles.box}
                             icon={() => (
@@ -93,7 +84,7 @@ const DrawerContent = (props: any) => {
                         />
                     )}
                     label="Sair"
-                    onPress={() => { }}
+                    onPress={() => { props.navigation.navigate('Login')}}
                 />
             </Drawer.Section>
         </View>
