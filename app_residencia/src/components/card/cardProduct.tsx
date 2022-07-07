@@ -1,14 +1,46 @@
-import * as React from 'react';
-import { TouchableOpacity, Image, Text } from 'react-native';
+import React, { useContext } from 'react';
+import { TouchableOpacity, Image, Text, Alert } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { CarrinhoContext } from '../../context/carrinhoContext';
 
 const CardProduct = ({ dados, navigation }) => {
 
     const dadosProduto = dados;
     console.log(dadosProduto);
+
+    const handleAddProduto = () => {
+        adicionarProduto(
+            dadosProduto.sku,
+            dadosProduto.nomeProduto,
+            dadosProduto.descricaoProduto,
+            dadosProduto.precoProduto,
+            dadosProduto.imagemProduto,
+        );
+        Alert.alert('Carrinho', 'Produto adicionado ao carrinho', [
+            { text: 'OK', onPress: () => console.log() },
+        ]);
+    };
+
+    const handleFav = () => {
+        adicionarFavorito(
+            dadosProduto.sku,
+            dadosProduto.nomeProduto,
+            dadosProduto.descricaoProduto,
+            dadosProduto.precoProduto,
+            dadosProduto.imagemProduto,
+        );
+        Alert.alert('Favoritos', 'Produto adicionado aos Favoritos', [
+            { text: 'OK', onPress: () => console.log() },
+        ]);
+    };
+
+
+
+
+    const { adicionarProduto, adicionarFavorito } = useContext(CarrinhoContext)
 
     return (
 
@@ -24,14 +56,14 @@ const CardProduct = ({ dados, navigation }) => {
                 <View style={styles.icones}>
                     <Text style={{ color: "black", marginLeft: 10 }}>R$ {dadosProduto.precoProduto}</Text>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('')}>
+                    <TouchableOpacity onPress={() => handleAddProduto()}>
                         <Icon style={{ marginLeft: 50, }}
                             name="shopping-cart"
                             color={"black"}
                             size={22}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <TouchableOpacity onPress={() => handleFav()}>
                         <Icon style={{ marginLeft: 8, }}
                             name="heart" type='ant-design'
                             color={'black'}
